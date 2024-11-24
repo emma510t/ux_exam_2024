@@ -1,1 +1,16 @@
 /* global variables */
+
+:root {
+    /* FONTS */
+    --fontFamily: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif; ;
+    
+    /* COLORS */
+    --colorPrimary-200: #3500C7;
+    --colorPrimary-100: #C5CEF1;
+    --colorSecondary-200: #E64E7C;
+    --colorSecondary-100: #FFF5FE;
+    --colorNeutral-400: #333333;
+    --colorNeutral-300: #555555;
+    --colorNeutral-200: #EEEEEE;
+    --colorNeutral-100: #FBFBFB;
+}
