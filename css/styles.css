@@ -1,5 +1,7 @@
 @import "_variables.css";
 
+@import "_navigation.css";
+
 * {
   margin: 0;
   padding: 0;
@@ -7,4 +9,8 @@
 
 body {
   font-family: var(--fontFamily);
+}
+
+a {
+  text-decoration: none;
 }
