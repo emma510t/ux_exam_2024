@@ -38,6 +38,13 @@ header {
   }
 }
 
+#popular_books {
+  margin: var(--size-4) var(--size-2-5);
+  h4 {
+    font-size: var(--size-5);
+  }
+}
+
 /* Tablet */
 @media (min-width: 650px) {
   #hero {
@@ -84,7 +91,7 @@ header {
   }
 }
 
-/* Desktop */
+/* Desktop MAX */
 @media (min-width: 1310px) {
   #hero {
     h2 {
