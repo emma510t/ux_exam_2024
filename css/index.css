@@ -1,8 +1,3 @@
-/* DELETE */
-header {
-  height: 110px;
-}
-
 #hero {
   display: flex;
   flex-direction: column;
@@ -38,10 +33,13 @@ header {
   }
 }
 
-#popular_books {
+.popular_books {
   margin: var(--size-4) var(--size-2-5);
   h4 {
     font-size: var(--size-5);
+  }
+  .hide {
+    display: none;
   }
 }
 
@@ -70,6 +68,14 @@ header {
   }
 }
 
+/* Media query for showing extra book in books section */
+@media (min-width: 800px) {
+  .popular_books {
+    .hide {
+      display: block;
+    }
+  }
+}
 /* Desktop */
 @media (min-width: 1060px) {
   #hero {
@@ -78,7 +84,6 @@ header {
 
     h2 {
       font-size: var(--size-48);
-      font-size: clamp(12rem, 2.5vw, 14rem);
     }
 
     #subtitle {

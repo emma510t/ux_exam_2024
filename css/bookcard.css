@@ -1,0 +1,72 @@
+.popular_books {
+  display: flex;
+  flex-direction: column;
+
+  .book_section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    gap: var(--size-2);
+
+    a {
+      min-width: var(--size-36);
+      max-width: var(--size-56);
+    }
+
+    .book_card {
+      background-color: var(--colorPrimary-100);
+      color: var(--colorNeutral-400);
+      height: 100%;
+      border-radius: var(--size-3);
+
+      div {
+        padding: var(--size-2-5);
+
+        p {
+          font-size: var(--size-3);
+          font-weight: 400;
+        }
+        .title {
+          font-size: var(--size-3-5);
+          font-weight: 700;
+          margin-bottom: var(--size-2);
+          /* max-width: 10ch;
+            white-space: normal;
+            overflow: hidden;
+            text-overflow: ellipsis; */
+        }
+      }
+
+      .book_card_img {
+        width: 100%;
+        border-top-right-radius: var(--size-3);
+        border-top-left-radius: var(--size-3);
+      }
+    }
+  }
+}
+/* Tablet */
+@media (min-width: 650px) {
+  .popular_books {
+    .book_section {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      justify-items: start;
+
+      gap: var(--size-4);
+
+      a {
+        min-width: var(--size-36);
+        max-width: var(--size-72);
+      }
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  .popular_books {
+    .book_section {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+}
