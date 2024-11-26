@@ -1,0 +1,16 @@
+/* DELETE */
+header {
+  height: 110px;
+}
+
+#hero {
+  background-image: url("/assets/images/landing_hero_mobile.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 75vh;
+
+  h1 {
+    font-family: var(--fontFamily);
+    font-size: var(--size-14);
+  }
+}
