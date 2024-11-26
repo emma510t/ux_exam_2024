@@ -1,56 +1,59 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 /* global variables */
 
 :root {
-    /* FONTS */
-    --fontFamily: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif; ;
-    
-    /* COLORS */
-    --colorPrimary-200: #3500C7;
-    --colorPrimary-100: #C5CEF1;
+  /* FONTS */
+  --fontFamily: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;
 
-    --colorSecondary-200: #950F4F;
-    --colorSecondary-100: #F5DDEB;
+  /* COLORS */
+  --colorPrimary-200: #3500c7;
+  --colorPrimary-100: #c5cef1;
 
-    --colorNeutral-400: #333333;
-    --colorNeutral-300: #555555;
-    --colorNeutral-200: #EEEEEE;
-    --colorNeutral-100: #FBFBFB;
+  --colorSecondary-200: #950f4f;
+  --colorSecondary-100: #f5ddeb;
 
-    /* SIZES */
-    --size-0-5: 0.125rem; /* 2px */
-    --size-1: 0.25rem; /* 4px */
-    --size-1-5: 0.375rem; /* 6px */
-    --size-2: 0.5rem; /* 8px */
-    --size-2-5: 0.625rem; /* 10px */
-    --size-3: 0.75rem; /* 12px */
-    --size-3-5: 0.875rem; /* 14px */
-    --size-4: 1rem; /* 16px */
-    --size-5: 1.25rem; /* 20px */
-    --size-6: 1.5rem; /* 24px */
-    --size-7: 1.75rem; /* 28px */
-    --size-8: 2rem; /* 32px */
-    --size-9: 2.25rem; /* 36px */
-    --size-10: 2.5rem; /* 40px */
-    --size-11: 2.75rem; /* 44px */
-    --size-12: 3rem; /* 48px */
-    --size-14: 3.5rem; /* 56px */
-    --size-16: 4rem; /* 64px */
-    --size-20: 5rem; /* 80px */
-    --size-24: 6rem; /* 96px */
-    --size-28: 7rem; /* 112px */
-    --size-32: 8rem; /* 128px */
-    --size-36: 9rem; /* 144px */
-    --size-40: 10rem; /* 160px */
-    --size-44: 11rem; /* 176px */
-    --size-48: 12rem; /* 192px */
-    --size-52: 13rem; /* 208px */
-    --size-56: 14rem; /* 224px */
-    --size-60: 15rem; /* 240px */
-    --size-64: 16rem; /* 256px */
-    --size-72: 18rem; /* 288px */
-    --size-80: 20rem; /* 320px */
-    --size-87: 21.75rem; /* 348px */
-    --size-96: 24rem; /* 384px */
+  --colorNeutral-400: #333333;
+  --colorNeutral-300: #555555;
+  --colorNeutral-200: #eeeeee;
+  --colorNeutral-100: #fbfbfb;
+
+  /* SIZES  REM*/
+  --size-0-5: 0.125rem; /* 2px */
+  --size-1: 0.25rem; /* 4px */
+  --size-1-5: 0.375rem; /* 6px */
+  --size-2: 0.5rem; /* 8px */
+  --size-2-5: 0.625rem; /* 10px */
+  --size-3: 0.75rem; /* 12px */
+  --size-3-5: 0.875rem; /* 14px */
+  --size-4: 1rem; /* 16px */
+  --size-5: 1.25rem; /* 20px */
+  --size-6: 1.5rem; /* 24px */
+  --size-7: 1.75rem; /* 28px */
+  --size-8: 2rem; /* 32px */
+  --size-9: 2.25rem; /* 36px */
+  --size-10: 2.5rem; /* 40px */
+  --size-11: 2.75rem; /* 44px */
+  --size-12: 3rem; /* 48px */
+  --size-13: 3.25rem; /* 52px */
+  --size-14: 3.5rem; /* 56px */
+  --size-16: 4rem; /* 64px */
+  --size-20: 5rem; /* 80px */
+  --size-24: 6rem; /* 96px */
+  --size-28: 7rem; /* 112px */
+  --size-32: 8rem; /* 128px */
+  --size-36: 9rem; /* 144px */
+  --size-40: 10rem; /* 160px */
+  --size-44: 11rem; /* 176px */
+  --size-48: 12rem; /* 192px */
+  --size-52: 13rem; /* 208px */
+  --size-56: 14rem; /* 224px */
+  --size-60: 15rem; /* 240px */
+  --size-64: 16rem; /* 256px */
+  --size-72: 18rem; /* 288px */
+  --size-80: 20rem; /* 320px */
+  --size-96: 24rem; /* 384px */
+
+  /* SIZES  %*/
+  --p-35: 35%;
 }

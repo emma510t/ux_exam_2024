@@ -1,0 +1,101 @@
+/* DELETE */
+header {
+  height: 110px;
+}
+
+#hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-image: url("/assets/images/landing_hero_mobile.jpg");
+  background-size: cover;
+  background-position: bottom;
+  height: 75vh;
+  padding: 0 var(--size-2-5);
+
+  h2 {
+    font-size: var(--size-13);
+    font-style: normal;
+    font-weight: 900;
+    color: var(--colorPrimary-200);
+    text-align: end;
+    letter-spacing: var(--size-0-5);
+  }
+
+  #subtitle {
+    margin-bottom: var(--p-35);
+
+    h3 {
+      font-size: var(--size-6);
+      font-weight: 800;
+      color: var(--colorPrimary-200);
+      text-align: end;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: var(--size-2);
+    }
+  }
+}
+
+#popular_books {
+  margin: var(--size-4) var(--size-2-5);
+  h4 {
+    font-size: var(--size-5);
+  }
+}
+
+/* Tablet */
+@media (min-width: 650px) {
+  #hero {
+    background-image: url("/assets/images/landing_hero.jpg");
+
+    h2 {
+      font-size: var(--size-28);
+    }
+
+    #subtitle {
+      margin-bottom: var(--size-28);
+
+      h3 {
+        font-size: var(--size-10);
+        span {
+          background-color: var(--colorPrimary-200);
+          color: var(--colorSecondary-100);
+          width: fit-content;
+          padding: 0 var(--size-7);
+        }
+      }
+    }
+  }
+}
+
+/* Desktop */
+@media (min-width: 1060px) {
+  #hero {
+    background-image: url("/assets/images/landing_hero.jpg");
+    height: 80vh;
+
+    h2 {
+      font-size: var(--size-48);
+      font-size: clamp(12rem, 2.5vw, 14rem);
+    }
+
+    #subtitle {
+      margin-bottom: var(--size-32);
+
+      h3 {
+        font-size: var(--size-14);
+      }
+    }
+  }
+}
+
+/* Desktop MAX */
+@media (min-width: 1310px) {
+  #hero {
+    h2 {
+      font-size: var(--size-60);
+    }
+  }
+}
