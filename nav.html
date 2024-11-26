@@ -4,12 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styles.css">
     <title>Document</title>
 </head>
 
 <body>
+    <header>
+        <div class="prim-nav-m">
+            <h1>
+                <a href="index.html" title="Homepage">BOOKS 4 U</a>
+            </h1>
+            <button class="hamburger-menu js-menu-toggle-btn" aria-label="Open mobile menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="23" viewBox="0 0 32 23" fill="none">
+                    <line x1="1.5" y1="1.5" x2="30.5" y2="1.5" stroke="#3500C7" stroke-width="3"
+                        stroke-linecap="round" />
+                    <line x1="1.5" y1="11.5" x2="30.5" y2="11.5" stroke="#3500C7" stroke-width="3"
+                        stroke-linecap="round" />
+                    <line x1="1.5" y1="21.5" x2="30.5" y2="21.5" stroke="#3500C7" stroke-width="3"
+                        stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <nav class="search_container">
+            <form class="search-box">
+                <div>
+                    <label for="search">Search</label>
+                    <input type="search" id="search" class="search-box__input" name="search" placeholder="Search"
+                        required="" autocomplete="on">
+                </div>
+                <div>
+                    <button type="reset" class="search-box_reset"><span class="icon-close">Close</span></button>
+                    <button type="submit" class="search-box_button"><span class="icon-search">Search</span></button>
+                </div>
+            </form>
+        </nav>
+        <nav class="prim-nav-d">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="discoverbooks.html">Discover books</a></li>
+                <li><a href="authors.html">Authors</a></li>
+            </ul>
+        </nav>
+        <nav class="utility-nav">
+            <ul>
+                <li><a href="login.html">Log in</a></li>
+                <li><a href="signup.html">Sign up</a></li>
+                <li><button id="logout">Log out</button></li>
+            </ul>
+        </nav>
 
+    </header>
+
+    <footer>
+        <p>&copy; UX exam 2024</p>
+    </footer>
 </body>
 
 </html>

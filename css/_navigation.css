@@ -1,2 +1,133 @@
 @import "_variables.css";
 
+/* HEADER */
+
+header {
+    background-color: var(--colorPrimary-100);
+    .prim-nav-m {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--size-2-5);
+    }
+    .search_container {
+        background-color: var(--colorSecondary-100);
+        padding: var(--size-2-5);
+        form {
+            background-color: var(--colorNeutral-100);
+            border-radius: var(--size-2);
+            display: flex;
+            justify-content: space-between;
+            justify-items: center;
+            max-width: var(--size-96);
+            margin: auto;
+            padding: var(--size-2) var(--size-3);
+            label {
+                width: 0;
+                height: 0;
+                display: block;
+                overflow: hidden;
+            }
+            input {
+                &::placeholder {
+                    color: var(--colorSecondary-200);
+                }
+                color: var(--colorNeutral-400);
+                border: 0;
+                font-size: var(--size-3-5);
+                font-weight: 700;
+                width: 100%;
+                background-color: var(--colorNeutral-100);
+            }
+            button {
+                display: inline-block;
+                background: none;
+                border: none;
+                &.search-box_reset {
+                    /* display: none; */
+                }
+                .icon-close, .icon-search {
+                    display: inline-block;
+                    text-indent: -9999px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    width: var(--size-3-5);
+                    height: var(--size-3-5); 
+                }
+                .icon-close {
+                    background: url('../close-icon.svg') no-repeat center center;
+                    background-size: contain;
+                }
+
+                .icon-search {
+                    background: url('../search-icon.svg') no-repeat center center;
+                    background-size: contain;
+                }
+
+            }
+        }
+    }
+    h1 {
+        word-spacing: -6px;
+        a {
+            color: var(--colorPrimary-200);
+        }
+    }
+    ul {
+        display: none;
+        list-style: none;
+    }
+}
+
+@media (min-width: 916px){
+    .hamburger-menu {
+        display: none;
+    }
+    header {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        background-color: var(--colorSecondary-100);
+        ul {
+            display: flex;
+            align-items: center;
+        }
+        .prim-nav-d {
+            display: flex;
+            margin: auto 0;
+            ul {
+                margin-left: auto;
+                gap: var(--size-7);
+                width: fit-content;
+                padding: var(--size-3) var(--size-6);
+                a {
+                    color: var(--colorSecondary-200);
+                    font-size: var(--size-3-5);
+                    font-weight: 700;
+                }
+            }
+        }
+        .utility-nav {
+            background-color: var(--colorPrimary-100);
+            order: -2;
+            grid-column: span 3;
+            ul {
+                gap: var(--size-2-5);
+                margin-left: auto;
+                width: fit-content;
+                padding: var(--size-3) var(--size-6);
+            }
+        }
+    }
+}
+
+/* FOOTER */
+
+footer {
+    background-color: var(--colorPrimary-100);
+    padding: var(--size-5);
+    p {
+        margin: auto;
+        width: fit-content;
+        font-weight: 400;
+        font-size: var(--size-3-5);
+    }
+}
