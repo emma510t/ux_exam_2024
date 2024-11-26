@@ -6,11 +6,31 @@ header {
 #hero {
   background-image: url("/assets/images/landing_hero_mobile.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: bottom;
   height: 75vh;
+  padding: 0 var(--size-2-5);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 
-  h1 {
-    font-family: var(--fontFamily);
-    font-size: var(--size-14);
+  h2 {
+    font-size: var(--size-13);
+    font-style: normal;
+    font-weight: 900;
+    color: var(--colorPrimary-200);
+    text-align: end;
+  }
+
+  #subtitle {
+    font-size: var(--size-5);
+    color: var(--colorPrimary-200);
+    text-align: end;
+    margin-bottom: 8rem;
+  }
+}
+
+@media (min-width: 400px) {
+  #hero {
+    background-image: url("/assets/images/landing_hero.jpg");
   }
 }
