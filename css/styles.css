@@ -1,4 +1,9 @@
 @import "_variables.css";
+<<<<<<< Updated upstream
+=======
+
+@import "_navigation.css";
+>>>>>>> Stashed changes
 
 * {
   margin: 0;
@@ -7,4 +12,8 @@
 
 body {
   font-family: var(--fontFamily);
+}
+
+a {
+  text-decoration: none;
 }
