@@ -35,53 +35,94 @@ export const handleBookCard = function (books) {
   const bookContainer = document.createElement("section");
   bookContainer.className = "book_section";
 
-  books.forEach((book, index) => {
+  // Array to hold all fetch promises
+  const fetchBook = books.map((book, index) => {
     // Getting the book id
     const bookId = book["book_id"];
 
-    //Fetching all the needed data for the book (also the cover)
-    const fetchBook = (endpoint) => {
-      fetch(`${baseUrl}${endpoint}`)
-        .then((response) => handleAPIError(response))
-        .then((bookData) => {
-          console.log(bookData);
+    // Fetching all the needed data for the book (also the cover)
+    return fetch(`${baseUrl}/books/${bookId}`)
+      .then((response) => handleAPIError(response))
+      .then((bookData) => {
+        // Create an article for the book
+        const bookArticle = document.createElement("article");
+        bookArticle.className = "book_card";
+
+        // Handling image if extern API fails
+        const bookCover = bookData.cover !== "" ? bookData.cover : "/assets/images/book_placeholder.jpg";
+
+        // Building the bookArticle
+        bookArticle.innerHTML = `
+              <div class="book_image_container">
+                <img src="${bookCover}" alt="" class="book_card_img">
+              </div>
+              <div class="text_container">
+                  <p class="title">${bookData.title}</p>
+                  <p>${bookData.author}</p>
+              </div>
+              `;
+
+        // Create an anchor element around the bookCard
+        const bookCard = document.createElement("a");
+        bookCard.href = `/book?id=${bookId}`;
+        if (index === 4) bookCard.className = "hide";
+        bookCard.appendChild(bookArticle);
+
+        // Appending the bookCard to the container
+        bookContainer.append(bookCard);
+      })
+      .catch(handleFetchCatchError);
+  });
+
+  // Check if there are fewer than three books fetched
+  if (books.length < 3) {
+    // Wait for all fetch promises to resolve before creating fakebooks
+    Promise.all(fetchBook)
+      .then(() => {
+        const fakeBooks = makeFakeBooks();
+
+        fakeBooks.forEach((book) => {
+          // Getting the book id
+          const bookId = book["book_id"];
+
           // Create an article for the book
           const bookArticle = document.createElement("article");
           bookArticle.className = "book_card";
+
           // Handling image if extern API fails
-          const bookCover = bookData.cover !== "" ? bookData.cover : "/assets/images/book_placeholder.jpg";
+          const bookCover = "/assets/images/book_placeholder.jpg";
+
           // Building the bookArticle
           bookArticle.innerHTML = `
-                <div class="book_image_container">
-                  <img src="${bookCover}" alt="" class="book_card_img">
-                </div>
-                <div class="text_container">
-                    <p class="title">${bookData.title}</p>
-                    <p>${bookData.author}</p>
-                </div>
-                `;
+                    <div class="book_image_container">
+                      <img src="${bookCover}" alt="" class="book_card_img">
+                    </div>
+                    <div class="text_container">
+                        <p class="title">${book.title}</p>
+                        <p>${book.author}</p>
+                    </div>
+                    `;
 
           // Create an anchor element around the bookCard
           const bookCard = document.createElement("a");
           bookCard.href = `/book?id=${bookId}`;
-          index === 4 ? (bookCard.className = "hide") : "";
           bookCard.appendChild(bookArticle);
 
           // Appending the bookCard to the container
           bookContainer.append(bookCard);
-        })
-        .catch(handleFetchCatchError);
-    };
-    fetchBook(`/books/${bookId}`);
-  });
-
-  // appending to DOM
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching books or appending fake books:", error);
+      });
+  }
+  // Appending the container to the DOM
   document.querySelector(".popular_books").append(bookContainer);
 };
 
 // Creates and displays a author card and display it to a .popular_authors section
 export const handleAuthorCard = function (authors, limit) {
-  const authorArray = limit ? authors.slice(0, 10) : authors;
+  const authorArray = limit ? getRandomAuthors(authors, 10) : authors;
 
   // Creating a section for all the authors
   const authorContainer = document.createElement("section");
@@ -109,11 +150,7 @@ export const handleAuthorCard = function (authors, limit) {
 
     // Create an anchor element around the authorCard
     const authorCard = document.createElement("a");
-    // set eventlistener to set seesionStorage to storage the authors id for further use
-    authorCard.addEventListener("click", () => {
-      sessionStorage.setItem("author", authorId);
-    });
-    authorCard.href = `/author.html?${author.author_name}`;
+    authorCard.href = `/author.html?id=${authorId}`;
     authorCard.appendChild(authorArticle);
 
     // Appending the authorCard to the container
@@ -123,3 +160,28 @@ export const handleAuthorCard = function (authors, limit) {
   // appending to DOM
   document.querySelector(".popular_authors").append(authorContainer);
 };
+
+function getRandomAuthors(array, count) {
+  const result = [];
+  const usedIndices = new Set();
+
+  while (result.length < count && result.length < array.length) {
+    const randomIndex = Math.floor(Math.random() * array.length);
+    if (!usedIndices.has(randomIndex)) {
+      usedIndices.add(randomIndex);
+      result.push(array[randomIndex]);
+    }
+  }
+
+  return result;
+}
+
+function makeFakeBooks() {
+  const fakeBooks = [
+    { book_id: 1005, title: "The book of mystery", publishing_year: 1911, author: "The ghost", publishing_company: "Labadie-Zboncak" },
+    { book_id: 1005, title: "The book of mystery", publishing_year: 1911, author: "The ghost", publishing_company: "Labadie-Zboncak" },
+    { book_id: 1005, title: "The book of mystery", publishing_year: 1911, author: "The ghost", publishing_company: "Labadie-Zboncak" },
+    { book_id: 1005, title: "The book of mystery", publishing_year: 1911, author: "The ghost", publishing_company: "Labadie-Zboncak" },
+  ];
+  return fakeBooks;
+}

@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
-    gap: var(--size-2);
+    gap: var(--size-3);
 
     a {
       background-color: var(--colorPrimary-100);

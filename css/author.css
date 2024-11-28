@@ -1,0 +1,11 @@
+main {
+  display: grid;
+  padding: var(--size-4) var(--size-2-5);
+
+  > section {
+    width: 100%;
+    max-width: var(--size-335);
+    justify-self: center;
+    align-self: center;
+  }
+}
