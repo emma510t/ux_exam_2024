@@ -1,4 +1,6 @@
 @import "_variables.css";
+@import "__bookcard.css";
+@import "__authorcard.css";
 
 @import "_navigation.css";
 

@@ -1,6 +1,8 @@
-/* DELETE */
-header {
-  height: 110px;
+main {
+  display: grid;
+}
+h4 {
+  font-size: clamp(var(--size-5-5), -3.1705rem + 9.0909vw, var(--size-10-5));
 }
 
 #hero {
@@ -10,7 +12,6 @@ header {
   background-image: url("/assets/images/landing_hero_mobile.jpg");
   background-size: cover;
   background-position: bottom;
-  height: 75vh;
   padding: 0 var(--size-2-5);
 
   h2 {
@@ -20,6 +21,7 @@ header {
     color: var(--colorPrimary-200);
     text-align: end;
     letter-spacing: var(--size-0-5);
+    margin-bottom: 0;
   }
 
   #subtitle {
@@ -38,10 +40,52 @@ header {
   }
 }
 
-#popular_books {
-  margin: var(--size-4) var(--size-2-5);
-  h4 {
-    font-size: var(--size-5);
+.books_section {
+  justify-self: center;
+  width: 100%;
+  max-width: var(--size-335);
+  padding: var(--size-4) var(--size-2-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-6);
+  .popular_books {
+    .hide {
+      display: none;
+    }
+  }
+}
+
+.authors_section {
+  justify-self: center;
+  width: 100%;
+  max-width: var(--size-335);
+  padding: var(--size-4) var(--size-2-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-6);
+}
+
+.more_btn {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  gap: var(--size-2);
+  color: var(--colorSecondary-200);
+  font-size: var(--size-3-5);
+  width: fit-content;
+
+  img {
+    height: var(--size-2-5);
+  }
+}
+.more_btn:hover {
+  text-decoration: underline;
+}
+
+/* Mobile device in horizontal mode */
+@media (min-height: 650px) {
+  #hero {
+    height: 75vh;
   }
 }
 
@@ -70,6 +114,14 @@ header {
   }
 }
 
+/* Media query for showing extra book in books section */
+@media (min-width: 800px) {
+  .books_section .popular_books {
+    .hide {
+      display: block;
+    }
+  }
+}
 /* Desktop */
 @media (min-width: 1060px) {
   #hero {
@@ -78,7 +130,6 @@ header {
 
     h2 {
       font-size: var(--size-48);
-      font-size: clamp(12rem, 2.5vw, 14rem);
     }
 
     #subtitle {
@@ -88,6 +139,16 @@ header {
         font-size: var(--size-14);
       }
     }
+  }
+  .more_btn {
+    font-size: var(--size-4);
+
+    img {
+      height: var(--size-2-5);
+    }
+  }
+  .more_btn:hover {
+    text-decoration: underline;
   }
 }
 
