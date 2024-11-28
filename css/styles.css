@@ -10,8 +10,32 @@
 
 body {
   font-family: var(--fontFamily);
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-color: var(--colorNeutral-100);
 }
 
 a {
   text-decoration: none;
+}
+
+h2 {
+  color: var(--colorNeutral-400);
+  font-size: clamp(var(--size-5-5), 0.9836rem + 1.9569vw, var(--size-10-5));
+  font-weight: 700;
+  margin-bottom: clamp(var(--size-4-5), 1.125rem + 1.302vw, var(--size-11));
+}
+
+.btn_prim {
+  padding: var(--size-2) var(--size-3);
+  border: none;
+  border-radius: var(--size-2);
+  font-size: var(--size-3-5);
+  font-weight: 700;
+  background-color: var(--colorPrimary-200);
+  color: var(--colorNeutral-100);
+}
+
+.btn_ghost {
 }
