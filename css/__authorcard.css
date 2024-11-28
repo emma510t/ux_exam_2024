@@ -18,11 +18,11 @@
       .author_card {
         padding: var(--size-2-5);
         .title {
-          font-size: var(--size-3-5);
+          font-size: clamp(var(--size-3-5), -1.3977rem + 4.5455vw, var(--size-6));
           font-weight: 700;
         }
         p {
-          font-size: var(--size-3);
+          font-size: clamp(0.75rem, 0.2955rem + 0.9091vw, 0.875rem);
           font-weight: 400;
 
           .author_svg {
@@ -59,32 +59,11 @@
   }
 }
 
-/* @media (min-width: 800px) {
-  .popular_authors .author_section {
-    a .author_card {
-      .title {
-        font-size: var(--size-6);
-      }
-      p {
-        font-size: var(--size-5);
-      }
-    }
-  }
-} */
-
+/* Desktop */
 @media (min-width: 1060px) {
   .popular_authors {
     .author_section {
       grid-template-columns: repeat(5, 1fr);
-
-      a .author_card {
-        .title {
-          font-size: var(--size-6);
-        }
-        p {
-          font-size: var(--size-5);
-        }
-      }
     }
   }
 }

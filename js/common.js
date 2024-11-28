@@ -114,7 +114,11 @@ export const handleAuthorCard = function (authors, limit) {
 
     // Create an anchor element around the authorCard
     const authorCard = document.createElement("a");
-    authorCard.href = `/authors?id=${authorId}`;
+    // set eventlistener to set seesionStorage to storage the authors id for further use
+    authorCard.addEventListener("click", () => {
+      sessionStorage.setItem("author", authorId);
+    });
+    authorCard.href = `/author.html?${author.author_name}`;
     authorCard.appendChild(authorArticle);
 
     // Appending the authorCard to the container
