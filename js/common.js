@@ -52,8 +52,10 @@ export const handleBookCard = function (books) {
           const bookCover = bookData.cover !== "" ? bookData.cover : "/assets/images/book_placeholder.jpg";
           // Building the bookArticle
           bookArticle.innerHTML = `
-                <img src="${bookCover}" alt="" class="book_card_img">
-                <div>
+                <div class="book_image_container">
+                  <img src="${bookCover}" alt="" class="book_card_img">
+                </div>
+                <div class="text_container">
                     <p class="title">${bookData.title}</p>
                     <p>${bookData.author}</p>
                 </div>
