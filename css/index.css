@@ -1,3 +1,7 @@
+h4 {
+  font-size: var(--size-5);
+}
+
 #hero {
   display: flex;
   flex-direction: column;
@@ -35,12 +39,30 @@
 
 .popular_books {
   margin: var(--size-4) var(--size-2-5);
-  h4 {
-    font-size: var(--size-5);
-  }
   .hide {
     display: none;
   }
+}
+
+.popular_authors {
+  margin: var(--size-4) var(--size-2-5);
+}
+
+.more_btn {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  gap: var(--size-2);
+  color: var(--colorSecondary-200);
+  font-size: var(--size-3-5);
+  width: fit-content;
+
+  img {
+    height: var(--size-2-5);
+  }
+}
+.more_btn:hover {
+  text-decoration: underline;
 }
 
 /* Tablet */
@@ -70,6 +92,9 @@
 
 /* Media query for showing extra book in books section */
 @media (min-width: 800px) {
+  h4 {
+    font-size: var(--size-10);
+  }
   .popular_books {
     .hide {
       display: block;
@@ -93,6 +118,16 @@
         font-size: var(--size-14);
       }
     }
+  }
+  .more_btn {
+    font-size: var(--size-4);
+
+    img {
+      height: var(--size-2-5);
+    }
+  }
+  .more_btn:hover {
+    text-decoration: underline;
   }
 }
 

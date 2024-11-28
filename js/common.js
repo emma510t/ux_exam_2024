@@ -22,18 +22,18 @@ export const handleFetchCatchError = (error) => {
 };
 
 // function to fetch books from API and calls handleBookCard
-export const fetchBooks = (endpoint) => {
+export const fetchAPI = (endpoint, func_name, parameter) => {
   fetch(`${baseUrl}${endpoint}`)
     .then((response) => handleAPIError(response))
-    .then((response) => handleBookCard(response))
+    .then((response) => func_name(response, parameter))
     .catch(handleFetchCatchError);
 };
 
 // Creates and displays a book card and display it to a .popular_books section
-const handleBookCard = function (books) {
-  // Creating a section for all the books
-  const bookSection = document.createElement("section");
-  bookSection.className = "book_section";
+export const handleBookCard = function (books) {
+  // Creating a container for all the books
+  const bookContainer = document.createElement("section");
+  bookContainer.className = "book_section";
 
   books.forEach((book, index) => {
     // Getting the book id
@@ -61,16 +61,70 @@ const handleBookCard = function (books) {
 
           // Create an anchor element around the bookCard
           const bookCard = document.createElement("a");
-          bookCard.href = "/";
+          bookCard.href = `/book?id=${bookId}`;
           index === 4 ? (bookCard.className = "hide") : "";
           bookCard.appendChild(bookArticle);
 
-          // Appending the bookCard to the section
-          bookSection.append(bookCard);
+          // Appending the bookCard to the container
+          bookContainer.append(bookCard);
         })
         .catch(handleFetchCatchError);
     };
     fetchBook(`/books/${bookId}`);
   });
-  document.querySelector(".popular_books").append(bookSection);
+  // making the discover button
+  const discoverBtn = document.createElement("a");
+  discoverBtn.href = "discover.html";
+  discoverBtn.className = "more_btn";
+  discoverBtn.innerHTML = `Dicover more <img src="/assets/icons/btn_arrow.svg" alt="arrow" />`;
+
+  // appending to DOM
+  document.querySelector(".popular_books").append(bookContainer, discoverBtn);
+};
+
+// Creates and displays a author card and display it to a .popular_authors section
+export const handleAuthorCard = function (authors, limit) {
+  const authorArray = limit ? authors.slice(0, 10) : authors;
+
+  // Creating a section for all the authors
+  const authorContainer = document.createElement("section");
+  authorContainer.className = "author_section";
+
+  authorArray.forEach((author) => {
+    const authorId = author["author_id"];
+    console.log(authorId);
+    // Create an article for the author
+    const authorArticle = document.createElement("article");
+    authorArticle.className = "author_card";
+
+    authorArticle.innerHTML = `
+    <p class="title">${author.author_name}</p>
+    <p>
+      See their books
+      <span>
+        <svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="author_svg">
+          <path d="M2 2L9 9" stroke-width="4" stroke-linecap="round" />
+          <path d="M2 16L9 9" stroke-width="4" stroke-linecap="round" />
+        </svg>
+      </span>
+    </p>
+    `;
+
+    // Create an anchor element around the authorCard
+    const authorCard = document.createElement("a");
+    authorCard.href = `/authors?id=${authorId}`;
+    authorCard.appendChild(authorArticle);
+
+    // Appending the authorCard to the container
+    authorContainer.append(authorCard);
+  });
+
+  // making the discover button
+  const allAuthorBtn = document.createElement("a");
+  allAuthorBtn.href = "authors.html";
+  allAuthorBtn.className = "more_btn";
+  allAuthorBtn.innerHTML = `See all authors <img src="/assets/icons/btn_arrow.svg" alt="arrow" />`;
+
+  // appending to DOM
+  document.querySelector(".popular_authors").append(authorContainer, allAuthorBtn);
 };
