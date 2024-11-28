@@ -1,8 +1,4 @@
 .popular_books {
-  display: flex;
-  flex-direction: column;
-  gap: var(--size-6);
-
   .book_section {
     display: grid;
     grid-template-columns: 1fr 1fr;

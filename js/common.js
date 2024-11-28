@@ -74,14 +74,9 @@ export const handleBookCard = function (books) {
     };
     fetchBook(`/books/${bookId}`);
   });
-  // making the discover button
-  const discoverBtn = document.createElement("a");
-  discoverBtn.href = "discoverbooks.html";
-  discoverBtn.className = "more_btn";
-  discoverBtn.innerHTML = `Dicover more <img src="/assets/icons/btn_arrow.svg" alt="arrow" />`;
 
   // appending to DOM
-  document.querySelector(".popular_books").append(bookContainer, discoverBtn);
+  document.querySelector(".popular_books").append(bookContainer);
 };
 
 // Creates and displays a author card and display it to a .popular_authors section
@@ -125,12 +120,6 @@ export const handleAuthorCard = function (authors, limit) {
     authorContainer.append(authorCard);
   });
 
-  // making the see all authors button
-  const allAuthorBtn = document.createElement("a");
-  allAuthorBtn.href = "authors.html";
-  allAuthorBtn.className = "more_btn";
-  allAuthorBtn.innerHTML = `See all authors <img src="/assets/icons/btn_arrow.svg" alt="arrow" />`;
-
   // appending to DOM
-  document.querySelector(".popular_authors").append(authorContainer, allAuthorBtn);
+  document.querySelector(".popular_authors").append(authorContainer);
 };
