@@ -22,7 +22,7 @@
           padding: var(--size-2-5);
 
           p {
-            font-size: clamp(0.75rem, 0.2955rem + 0.9091vw, 0.875rem);
+            font-size: clamp(var(--size-3), 0.2955rem + 0.9091vw, var(--size-3-5));
             font-weight: 400;
           }
           .title {
@@ -42,9 +42,8 @@
           border-top-right-radius: var(--size-3);
           border-top-left-radius: var(--size-3);
           aspect-ratio: 1/1;
-          position: relative;
           overflow: hidden;
-          background-color: rgb(238, 238, 238);
+          background-color: var(--colorNeutral-100);
 
           .book_card_img {
             width: 100%;

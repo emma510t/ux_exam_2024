@@ -21,7 +21,7 @@ export const handleFetchCatchError = (error) => {
   document.querySelector("main").append(errorSection);
 };
 
-// function to fetch books from API and calls handleBookCard
+// function to fetch from API and calls a function with parameter if needed
 export const fetchAPI = (endpoint, func_name, parameter) => {
   fetch(`${baseUrl}${endpoint}`)
     .then((response) => handleAPIError(response))
@@ -76,7 +76,7 @@ export const handleBookCard = function (books) {
   });
   // making the discover button
   const discoverBtn = document.createElement("a");
-  discoverBtn.href = "discover.html";
+  discoverBtn.href = "discoverbooks.html";
   discoverBtn.className = "more_btn";
   discoverBtn.innerHTML = `Dicover more <img src="/assets/icons/btn_arrow.svg" alt="arrow" />`;
 
@@ -125,7 +125,7 @@ export const handleAuthorCard = function (authors, limit) {
     authorContainer.append(authorCard);
   });
 
-  // making the discover button
+  // making the see all authors button
   const allAuthorBtn = document.createElement("a");
   allAuthorBtn.href = "authors.html";
   allAuthorBtn.className = "more_btn";

@@ -1,5 +1,8 @@
+main {
+  display: grid;
+}
 h4 {
-  font-size: var(--size-5);
+  font-size: clamp(var(--size-5-5), -3.1705rem + 9.0909vw, var(--size-10-5));
 }
 
 #hero {
@@ -9,7 +12,6 @@ h4 {
   background-image: url("/assets/images/landing_hero_mobile.jpg");
   background-size: cover;
   background-position: bottom;
-  height: 75vh;
   padding: 0 var(--size-2-5);
 
   h2 {
@@ -19,6 +21,7 @@ h4 {
     color: var(--colorPrimary-200);
     text-align: end;
     letter-spacing: var(--size-0-5);
+    margin-bottom: 0;
   }
 
   #subtitle {
@@ -38,14 +41,20 @@ h4 {
 }
 
 .popular_books {
-  margin: var(--size-4) var(--size-2-5);
+  justify-self: center;
+  width: 100%;
+  max-width: var(--size-335);
+  padding: var(--size-4) var(--size-2-5);
   .hide {
     display: none;
   }
 }
 
 .popular_authors {
-  margin: var(--size-4) var(--size-2-5);
+  justify-self: center;
+  width: 100%;
+  max-width: var(--size-335);
+  padding: var(--size-4) var(--size-2-5);
 }
 
 .more_btn {
@@ -63,6 +72,13 @@ h4 {
 }
 .more_btn:hover {
   text-decoration: underline;
+}
+
+/* Mobile device in horizontal mode */
+@media (min-height: 650px) {
+  #hero {
+    height: 75vh;
+  }
 }
 
 /* Tablet */
@@ -92,9 +108,6 @@ h4 {
 
 /* Media query for showing extra book in books section */
 @media (min-width: 800px) {
-  h4 {
-    font-size: var(--size-10);
-  }
   .popular_books {
     .hide {
       display: block;
