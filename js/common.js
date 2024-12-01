@@ -30,7 +30,7 @@ export const fetchAPI = (endpoint, func_name, parameter) => {
 };
 
 // Creates and displays a book card and display it to a .popular_books section
-export const handleBookCard = function (books) {
+export const handleBookCard = function (books, page) {
   // Creating a container for all the books
   const bookContainer = document.createElement("section");
   bookContainer.className = "book_section";
@@ -51,6 +51,11 @@ export const handleBookCard = function (books) {
         // Handling image if extern API fails
         const bookCover = bookData.cover !== "" ? bookData.cover : "/assets/images/book_placeholder.jpg";
 
+        const subtitle =
+          page === "index"
+            ? `<p>${bookData.author}</p>`
+            : '<p>About the book <span><svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg"> <path d="M2 2L9 9" stroke-width="4" stroke-linecap="round" /> <path d="M2 16L9 9" stroke-width="4" stroke-linecap="round" /></svg></span></p>';
+
         // Building the bookArticle
         bookArticle.innerHTML = `
               <div class="book_image_container">
@@ -58,14 +63,18 @@ export const handleBookCard = function (books) {
               </div>
               <div class="text_container">
                   <p class="title">${bookData.title}</p>
-                  <p>${bookData.author}</p>
+                  ${subtitle}
               </div>
               `;
 
         // Create an anchor element around the bookCard
         const bookCard = document.createElement("a");
         bookCard.href = `/book?id=${bookId}`;
-        if (index === 4) bookCard.className = "hide";
+
+        // If its the index page, then the fifth book will have special class
+        if (page === "index") {
+          index === 4 ? (bookCard.className = "fifth_book") : "";
+        }
         bookCard.appendChild(bookArticle);
 
         // Appending the bookCard to the container
@@ -74,48 +83,55 @@ export const handleBookCard = function (books) {
       .catch(handleFetchCatchError);
   });
 
-  // Check if there are fewer than three books fetched
-  if (books.length < 3) {
-    // Wait for all fetch promises to resolve before creating fakebooks
-    Promise.all(fetchBook)
-      .then(() => {
-        const fakeBooks = makeFakeBooks();
+  // Check if there are fewer than three books fetched on the author site
+  // if (page === "author" && books.length < 3) {
+  //   // Wait for all fetch promises to resolve before creating fakebooks
+  //   Promise.all(fetchBook)
+  //     .then(() => {
+  //       const fakeBooks = makeFakeBooks();
 
-        fakeBooks.forEach((book) => {
-          // Getting the book id
-          const bookId = book["book_id"];
+  //       fakeBooks.forEach((book) => {
+  //         // Getting the book id
+  //         const bookId = book["book_id"];
 
-          // Create an article for the book
-          const bookArticle = document.createElement("article");
-          bookArticle.className = "book_card";
+  //         // Create an article for the book
+  //         const bookArticle = document.createElement("article");
+  //         bookArticle.className = "book_card";
 
-          // Handling image if extern API fails
-          const bookCover = "/assets/images/book_placeholder.jpg";
+  //         // Handling image if extern API fails
+  //         const bookCover = "/assets/images/book_placeholder.jpg";
 
-          // Building the bookArticle
-          bookArticle.innerHTML = `
-                    <div class="book_image_container">
-                      <img src="${bookCover}" alt="" class="book_card_img">
-                    </div>
-                    <div class="text_container">
-                        <p class="title">${book.title}</p>
-                        <p>${book.author}</p>
-                    </div>
-                    `;
+  //         // Building the bookArticle
+  //         bookArticle.innerHTML = `
+  //                   <div class="book_image_container">
+  //                     <img src="${bookCover}" alt="" class="book_card_img">
+  //                   </div>
+  //                   <div class="text_container">
+  //                       <p class="title">${book.title}</p>
+  //                       <p>About the book
+  //                         <span>
+  //                           <svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg">
+  //                             <path d="M2 2L9 9" stroke-width="4" stroke-linecap="round" />
+  //                             <path d="M2 16L9 9" stroke-width="4" stroke-linecap="round" />
+  //                           </svg>
+  //                         </span>
+  //                       </p>
+  //                   </div>
+  //                   `;
 
-          // Create an anchor element around the bookCard
-          const bookCard = document.createElement("a");
-          bookCard.href = `/book?id=${bookId}`;
-          bookCard.appendChild(bookArticle);
+  //         // Create an anchor element around the bookCard
+  //         const bookCard = document.createElement("a");
+  //         bookCard.href = `/book?id=${bookId}`;
+  //         bookCard.appendChild(bookArticle);
 
-          // Appending the bookCard to the container
-          bookContainer.append(bookCard);
-        });
-      })
-      .catch((error) => {
-        console.error("Error fetching books or appending fake books:", error);
-      });
-  }
+  //         // Appending the bookCard to the container
+  //         bookContainer.append(bookCard);
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching books or appending fake books:", error);
+  //     });
+  // }
   // Appending the container to the DOM
   document.querySelector(".popular_books").append(bookContainer);
 };
@@ -148,9 +164,10 @@ export const handleAuthorCard = function (authors, limit) {
     </p>
     `;
 
-    // Create an anchor element around the authorCard
+    // Create an anchor element around the authorCard, and set href to send the id and author name
+    const authorNameURL = author.author_name.replaceAll(" ", "-");
     const authorCard = document.createElement("a");
-    authorCard.href = `/author.html?id=${authorId}`;
+    authorCard.href = `/author.html?id=${authorId}&author=${authorNameURL}`;
     authorCard.appendChild(authorArticle);
 
     // Appending the authorCard to the container

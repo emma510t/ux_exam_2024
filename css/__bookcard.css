@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
-    gap: var(--size-3);
+    gap: var(--size-7) var(--size-3);
 
     a {
       background-color: var(--colorPrimary-100);
@@ -20,6 +20,10 @@
           p {
             font-size: clamp(var(--size-3), 0.2955rem + 0.9091vw, var(--size-3-5));
             font-weight: 400;
+            .svg {
+              height: var(--size-2-5);
+              stroke: var(--colorNeutral-400);
+            }
           }
           .title {
             font-size: clamp(var(--size-3-5), -1.3977rem + 4.5455vw, var(--size-6));
@@ -56,6 +60,10 @@
     a:focus {
       background-color: var(--colorPrimary-200);
       color: var(--colorNeutral-100);
+
+      .book_card .text_container p .svg {
+        stroke: var(--colorNeutral-100);
+      }
     }
   }
 }
@@ -66,7 +74,7 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       justify-items: start;
-      gap: var(--size-4);
+      gap: var(--size-14) var(--size-5);
     }
   }
 }

@@ -1,8 +1,9 @@
 import { fetchAPI, handleBookCard } from "./common.js";
 
-console.log("hello");
 const urlParams = new URLSearchParams(window.location.search);
 const authorId = urlParams.get("id");
-console.log(authorId);
+const authorName = urlParams.get("author").replaceAll("-", " ");
 
-fetchAPI(`/books?a=${authorId}`, handleBookCard);
+document.querySelector("#author_title").innerText = authorName;
+
+fetchAPI(`/books?a=${authorId}`, handleBookCard, "author");
