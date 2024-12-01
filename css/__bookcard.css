@@ -86,3 +86,41 @@
     }
   }
 }
+
+/* loader */
+.loading_section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--size-72);
+  width: 100%;
+
+  #loader {
+    z-index: -1; /* To make it appear behind the header (if scrolled) */
+    fill: var(--colorPrimary-200);
+    height: var(--size-40);
+    animation: loader 1s linear infinite;
+  }
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.appear {
+  animation: appear 0.5s linear;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}

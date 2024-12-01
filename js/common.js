@@ -132,8 +132,15 @@ export const handleBookCard = function (books, page) {
   //       console.error("Error fetching books or appending fake books:", error);
   //     });
   // }
-  // Appending the container to the DOM
-  document.querySelector(".popular_books").append(bookContainer);
+  // Appending the container to the DOM and hiding the loader
+  const popular_books = document.querySelector(".popular_books");
+  popular_books.append(bookContainer);
+
+  setTimeout(() => {
+    popular_books.classList.add("appear");
+    popular_books.classList.remove("hide");
+    document.querySelector(".loading_section").classList.add("hide");
+  }, 1000);
 };
 
 // Creates and displays a author card and display it to a .popular_authors section
