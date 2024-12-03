@@ -1,0 +1,36 @@
+main {
+  padding: var(--size-8) var(--size-2-5);
+  display: flex;
+  justify-content: center;
+
+  > section {
+    width: 100%;
+    max-width: var(--size-335);
+
+    .discover_more {
+      background-color: var(--colorSecondary-200);
+      color: var(--colorNeutral-100);
+      font-weight: 700;
+      font-size: var(--size-3-5);
+      border: none;
+      border-radius: var(--size-3);
+      padding: var(--size-2-5);
+      width: 100%;
+      margin-top: var(--size-4);
+    }
+    .discover_more:hover {
+      background-color: var(--colorSecondary-100);
+      color: var(--colorNeutral-400);
+    }
+  }
+}
+
+@media (min-width: 650px) {
+  main {
+    > section {
+      .discover_more {
+        width: fit-content;
+      }
+    }
+  }
+}

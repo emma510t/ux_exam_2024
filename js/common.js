@@ -64,7 +64,7 @@ export const handleBookCard = function (books, page) {
         const bookCover = bookData.cover !== "" ? bookData.cover : "/assets/images/book_placeholder.jpg";
 
         const subtitle =
-          page === "index"
+          page === "index" || page === "discover"
             ? `<p>${bookData.author}</p>`
             : '<p>About the book <span><svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg"> <path d="M2 2L9 9" stroke-width="4" stroke-linecap="round" /> <path d="M2 16L9 9" stroke-width="4" stroke-linecap="round" /></svg></span></p>';
 
@@ -102,6 +102,7 @@ export const handleBookCard = function (books, page) {
   setTimeout(() => {
     popular_books.classList.add("appear");
     popular_books.classList.remove("hide");
+    document.querySelector(".discover_more") ? document.querySelector(".discover_more").classList.remove("hide") : "";
     document.querySelector(".loading_section").classList.add("hide");
   }, 1000); // a timeout for hiding the loader and make the popular_books section appear
 };
