@@ -45,3 +45,9 @@ h2 {
 .hide {
   display: none;
 }
+
+#bread_crumb_divider {
+  stroke: var(--colorNeutral-300);
+  stroke-width: var(--size-0-5);
+  height: var(--size-3-5);
+}
