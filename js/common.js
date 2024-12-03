@@ -1,32 +1,44 @@
-export const baseUrl = "http://localhost:8080";
+const baseUrl = "http://localhost:8080";
 
 // Handles the first .then() in a fetch request, raising an error if the response code is not a 2xx
-export const handleAPIError = (response) => {
+const handleAPIError = (response) => {
   if (response.ok) {
     return response.json();
   }
-  throw new Error("HTTP response error");
+  // If the response is not OK, try to extract the error message from the response body
+  return response.json().then((errorDetails) => {
+    throw new Error(errorDetails.error || "HTTP response error"); // Fallback to a generic error message if no specific message exists
+  });
 };
 
 // Handles an error in a fetch request's .catch(), displaying an error message on the page
-export const handleFetchCatchError = (error) => {
+export const handleFetchCatchError = (error, method) => {
   const errorSection = document.createElement("section");
+  const action =
+    {
+      GET: "retrieving",
+      POST: "submitting",
+      PUT: "updating",
+      DELETE: "deleting",
+    }[method.toUpperCase()] || "processing";
+
   errorSection.innerHTML = `
         <h4>    
             <h3>Data Error</h3>
         </h4>
-        <p>An error occurred while getting the data</p>
+        <p>An error occurred while ${action} the data.</p>
         <p class="error">${error}</p>
     `;
   document.querySelector("main").append(errorSection);
 };
 
 // function to fetch from API and calls a function with parameter if needed
-export const fetchAPI = (endpoint, func_name, parameter) => {
-  fetch(`${baseUrl}${endpoint}`)
+export const fetchAPI = (endpoint, func_name, parameter, options = {}) => {
+  const method = options.method || "GET";
+  fetch(`${baseUrl}${endpoint}`, options)
     .then((response) => handleAPIError(response))
     .then((response) => func_name(response, parameter))
-    .catch(handleFetchCatchError);
+    .catch((error) => handleFetchCatchError(error, method));
 };
 
 // Creates and displays a book card and display it to a .popular_books section
