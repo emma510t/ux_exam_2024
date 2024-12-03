@@ -11,7 +11,7 @@ h1 {
 }
 
 li.hidden {
-  display: hidden;
+  display: none;
 }
 
 header {
