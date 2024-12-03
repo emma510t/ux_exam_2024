@@ -140,7 +140,7 @@ export const handleBookCard = function (books, page) {
     popular_books.classList.add("appear");
     popular_books.classList.remove("hide");
     document.querySelector(".loading_section").classList.add("hide");
-  }, 1000);
+  }, 1000); // a timeout for hiding the loader and make the popular_books section appear
 };
 
 // Creates and displays a author card and display it to a .popular_authors section
