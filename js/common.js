@@ -12,17 +12,26 @@ const handleAPIError = (response) => {
 };
 
 // Handles an error in a fetch request's .catch(), displaying an error message on the page
-export const handleFetchCatchError = (error, method) => {
+export const handleFetchCatchError = (error, method, func_name) => {
   if (method === "GET") {
     const errorSection = document.createElement("section");
     errorSection.innerHTML = `
     <h4>    
     <h3>Data Error</h3>
     </h4>
-    <p>An error occurred while retrieving the data.</p>
-    <p class="error">${error}</p>
+    <p>An error occurred while retrieving the data. Please come back later.</p>
     `;
-    document.querySelector("main").append(errorSection);
+    if (func_name.name === "handleBookCard") {
+      document.querySelector(".popular_books").classList.remove("hide");
+      document.querySelector(".loading_section").classList.add("hide");
+      document.querySelector(".popular_books").append(errorSection);
+      console.log(error);
+    } else {
+      document.querySelector(".popular_authors").classList.remove("hide");
+      document.querySelector(".loading_section").classList.add("hide");
+      document.querySelector(".popular_authors").append(errorSection);
+      console.log(error);
+    }
   } else {
     createToast(error, "negative");
   }
@@ -34,7 +43,7 @@ export const fetchAPI = (endpoint, func_name, parameter, options = {}) => {
   fetch(`${baseUrl}${endpoint}`, options)
     .then((response) => handleAPIError(response))
     .then((response) => func_name(response, parameter))
-    .catch((error) => handleFetchCatchError(error, method));
+    .catch((error) => handleFetchCatchError(error, method, func_name));
 };
 
 // Creates and displays a book card and display it to a .popular_books section
