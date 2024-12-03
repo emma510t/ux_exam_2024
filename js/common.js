@@ -41,7 +41,7 @@ export const handleBookCard = function (books, page) {
     const bookId = book["book_id"];
 
     // Fetching all the needed data for the book (also the cover)
-    return fetch(`${baseUrl}/books/${bookId}`)
+    fetch(`${baseUrl}/books/${bookId}`)
       .then((response) => handleAPIError(response))
       .then((bookData) => {
         // Create an article for the book
