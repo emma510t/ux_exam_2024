@@ -35,8 +35,8 @@ export const handleBookCard = function (books, page) {
   const bookContainer = document.createElement("section");
   bookContainer.className = "book_section";
 
-  // Array to hold all fetch promises
-  const fetchBook = books.map((book, index) => {
+  // looping over all the books
+  books.forEach((book, index) => {
     // Getting the book id
     const bookId = book["book_id"];
 
@@ -83,55 +83,6 @@ export const handleBookCard = function (books, page) {
       .catch(handleFetchCatchError);
   });
 
-  // Check if there are fewer than three books fetched on the author site
-  // if (page === "author" && books.length < 3) {
-  //   // Wait for all fetch promises to resolve before creating fakebooks
-  //   Promise.all(fetchBook)
-  //     .then(() => {
-  //       const fakeBooks = makeFakeBooks();
-
-  //       fakeBooks.forEach((book) => {
-  //         // Getting the book id
-  //         const bookId = book["book_id"];
-
-  //         // Create an article for the book
-  //         const bookArticle = document.createElement("article");
-  //         bookArticle.className = "book_card";
-
-  //         // Handling image if extern API fails
-  //         const bookCover = "/assets/images/book_placeholder.jpg";
-
-  //         // Building the bookArticle
-  //         bookArticle.innerHTML = `
-  //                   <div class="book_image_container">
-  //                     <img src="${bookCover}" alt="" class="book_card_img">
-  //                   </div>
-  //                   <div class="text_container">
-  //                       <p class="title">${book.title}</p>
-  //                       <p>About the book
-  //                         <span>
-  //                           <svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg">
-  //                             <path d="M2 2L9 9" stroke-width="4" stroke-linecap="round" />
-  //                             <path d="M2 16L9 9" stroke-width="4" stroke-linecap="round" />
-  //                           </svg>
-  //                         </span>
-  //                       </p>
-  //                   </div>
-  //                   `;
-
-  //         // Create an anchor element around the bookCard
-  //         const bookCard = document.createElement("a");
-  //         bookCard.href = `/book?id=${bookId}`;
-  //         bookCard.appendChild(bookArticle);
-
-  //         // Appending the bookCard to the container
-  //         bookContainer.append(bookCard);
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching books or appending fake books:", error);
-  //     });
-  // }
   // Appending the container to the DOM and hiding the loader
   const popular_books = document.querySelector(".popular_books");
   popular_books.append(bookContainer);
@@ -153,7 +104,6 @@ export const handleAuthorCard = function (authors, limit) {
 
   authorArray.forEach((author) => {
     const authorId = author["author_id"];
-    console.log(authorId);
     // Create an article for the author
     const authorArticle = document.createElement("article");
     authorArticle.className = "author_card";
@@ -198,14 +148,4 @@ function getRandomAuthors(array, count) {
   }
 
   return result;
-}
-
-function makeFakeBooks() {
-  const fakeBooks = [
-    { book_id: 1005, title: "The book of mystery", publishing_year: 1911, author: "The ghost", publishing_company: "Labadie-Zboncak" },
-    { book_id: 1005, title: "The book of mystery", publishing_year: 1911, author: "The ghost", publishing_company: "Labadie-Zboncak" },
-    { book_id: 1005, title: "The book of mystery", publishing_year: 1911, author: "The ghost", publishing_company: "Labadie-Zboncak" },
-    { book_id: 1005, title: "The book of mystery", publishing_year: 1911, author: "The ghost", publishing_company: "Labadie-Zboncak" },
-  ];
-  return fakeBooks;
 }
