@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/signup.css">
+    <script src="js/navigation.js" type="module"></script>
+    <script src="js/signup.js" type="module"></script>
+    <title>Sign up</title>
+</head>
+
+<body>
+    <header>
+        <div class="prim-nav-m">
+            <h1>
+                <a href="index.html" title="Homepage">BOOKS 4 U</a>
+            </h1>
+            <div class="burger-menu-container">
+                <label class="burger-menu-label" for="burger-menu-checkbox">
+                    <span class="burger-icon"></span>
+                </label>
+                <input type="checkbox" id="burger-menu-checkbox">
+            </div>
+        </div>
+        <nav class="search_container">
+            <form class="search-box">
+                <div>
+                    <label for="search">Search</label>
+                    <input type="search" id="search" class="search-box__input" name="search" placeholder="Search"
+                        required="" autocomplete="on">
+                </div>
+                <div>
+                    <button type="reset" class="search-box_reset hidden"><span class="icon-close">Close</span></button>
+                    <button type="submit" class="search-box_button"><span class="icon-search">Search</span></button>
+                </div>
+            </form>
+        </nav>
+        <nav class="prim-nav-d">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="discoverbooks.html">Discover books</a></li>
+                <li><a href="authors.html">Authors</a></li>
+            </ul>
+        </nav>
+        <nav class="utility-nav">
+            <ul>
+                <li><a href="login.html" id="login-link">Log in</a></li>
+                <li><a href="signup.html" id="signup-link">Sign up</a></li>
+                <li><a href="admin.html" id="admin-link"><span class="profile-icon"></span>Admin</a></li>
+                <li><a href="profile.html" id="profile-link"><span class="profile-icon"></span>Profile</a></li>
+                <li><button id="logout-btn">Log out</button></li>
+            </ul>
+        </nav>
+
+    </header>
+    <main>
+        <aside>
+            <img src="assets/images/landing_hero_mobile.jpg" alt="">
+        </aside>
+        <section class="signup_form">
+            <h2>Sign up for BOOKS 4 U</h2>
+            <form id="formSignup">
+                <div>
+                    <label for="userFirstname">First name</label>
+                    <input type="text" id="userFirstname" name="userFirstname" required minlength="2" maxlength="50"
+                        pattern="[A-Za-z\s'-]+"
+                        title="First name must be 2–50 characters and can include letters, spaces, hyphens, or apostrophes.">
+                    <span class="error-message hidden"></span>
+                </div>
+
+                <div>
+                    <label for="userLastname">Last name</label>
+                    <input type="text" id="userLastname" name="userLastname" required minlength="2" maxlength="50"
+                        pattern="[A-Za-z\s'-]+"
+                        title="Last name must be 2–50 characters and can include letters, spaces, hyphens, or apostrophes.">
+                    <span class="error-message hidden"></span>
+                </div>
+
+                <div>
+                    <label for="userEmail">E-mail</label>
+                    <input type="email" id="userEmail" name="userEmail" required
+                        title="Please enter a valid email address.">
+                    <span class="error-message hidden"></span>
+                </div>
+
+                <div>
+                    <label for="userPhone">Phone number</label>
+                    <input type="tel" id="userPhone" name="userPhone" required pattern="[0-9\s-]{7,15}"
+                        title="Phone number must be 7–15 digits and can include spaces or dashes.">
+                    <span class="error-message hidden"></span>
+                </div>
+
+                <div>
+                    <label for="userAddress">Address</label>
+                    <input type="text" id="userAddress" name="userAddress" required maxlength="100"
+                        title="Address cannot exceed 100 characters.">
+                    <span class="error-message hidden"></span>
+                </div>
+
+                <div>
+                    <label for="userDOB">Date of birth</label>
+                    <input type="date" id="userDOB" name="userDOB" max="2006-12-31" required
+                        title="You must be at least 13 years old.">
+                    <span class="error-message hidden"></span>
+                </div>
+
+                <div>
+                    <label for="userPassword">Password</label>
+                    <input type="password" id="userPassword" name="userPassword" required minlength="8"
+                        pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
+                        title="Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.">
+                    <span class="error-message hidden"></span>
+                </div>
+
+                <div>
+                    <label for="userRepeatPassword">Repeat password</label>
+                    <input type="password" id="userRepeatPassword" name="userRepeatPassword" required
+                        title="Repeat password must match the other password.">
+                    <span class="error-message hidden"></span>
+                </div>
+
+                <button class="btn_prim" type="submit">Sign up</button>
+            </form>
+
+
+        </section>
+    </main>
+    <footer>
+        <p>&copy; UX exam 2024</p>
+    </footer>
+</body>
+
+</html>
