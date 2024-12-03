@@ -100,17 +100,17 @@ main {
 
 input:invalid.invalid,
 input.invalid {
-  border: 2px solid red;
+  border: var(--size-0-5) solid var(--colorWarning-100);
 }
 
 input:focus:invalid {
-  border: 2px solid red;
+  border: var(--size-0-5) solid var(--colorWarning-100);
 }
 
 .error-message {
-  color: red;
-  font-size: 0.875rem;
-  margin-top: 4px;
+  color: var(--colorWarning-100);
+  font-size: var(--size-3-5);
+  margin-top: var(--size-1);
   display: block;
 }
 
