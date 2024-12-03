@@ -30,58 +30,73 @@ export const fetchAPI = (endpoint, func_name, parameter) => {
 };
 
 // Creates and displays a book card and display it to a .popular_books section
-export const handleBookCard = function (books) {
+export const handleBookCard = function (books, page) {
   // Creating a container for all the books
   const bookContainer = document.createElement("section");
   bookContainer.className = "book_section";
 
+  // looping over all the books
   books.forEach((book, index) => {
     // Getting the book id
     const bookId = book["book_id"];
 
-    //Fetching all the needed data for the book (also the cover)
-    const fetchBook = (endpoint) => {
-      fetch(`${baseUrl}${endpoint}`)
-        .then((response) => handleAPIError(response))
-        .then((bookData) => {
-          console.log(bookData);
-          // Create an article for the book
-          const bookArticle = document.createElement("article");
-          bookArticle.className = "book_card";
-          // Handling image if extern API fails
-          const bookCover = bookData.cover !== "" ? bookData.cover : "/assets/images/book_placeholder.jpg";
-          // Building the bookArticle
-          bookArticle.innerHTML = `
-                <div class="book_image_container">
-                  <img src="${bookCover}" alt="" class="book_card_img">
-                </div>
-                <div class="text_container">
-                    <p class="title">${bookData.title}</p>
-                    <p>${bookData.author}</p>
-                </div>
-                `;
+    // Fetching all the needed data for the book (also the cover)
+    fetch(`${baseUrl}/books/${bookId}`)
+      .then((response) => handleAPIError(response))
+      .then((bookData) => {
+        // Create an article for the book
+        const bookArticle = document.createElement("article");
+        bookArticle.className = "book_card";
 
-          // Create an anchor element around the bookCard
-          const bookCard = document.createElement("a");
-          bookCard.href = `/book?id=${bookId}`;
-          index === 4 ? (bookCard.className = "hide") : "";
-          bookCard.appendChild(bookArticle);
+        // Handling image if extern API fails
+        const bookCover = bookData.cover !== "" ? bookData.cover : "/assets/images/book_placeholder.jpg";
 
-          // Appending the bookCard to the container
-          bookContainer.append(bookCard);
-        })
-        .catch(handleFetchCatchError);
-    };
-    fetchBook(`/books/${bookId}`);
+        const subtitle =
+          page === "index"
+            ? `<p>${bookData.author}</p>`
+            : '<p>About the book <span><svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg"> <path d="M2 2L9 9" stroke-width="4" stroke-linecap="round" /> <path d="M2 16L9 9" stroke-width="4" stroke-linecap="round" /></svg></span></p>';
+
+        // Building the bookArticle
+        bookArticle.innerHTML = `
+              <div class="book_image_container">
+                <img src="${bookCover}" alt="" class="book_card_img">
+              </div>
+              <div class="text_container">
+                  <p class="title">${bookData.title}</p>
+                  ${subtitle}
+              </div>
+              `;
+
+        // Create an anchor element around the bookCard
+        const bookCard = document.createElement("a");
+        bookCard.href = `/book?id=${bookId}`;
+
+        // If its the index page, then the fifth book will have special class
+        if (page === "index") {
+          index === 4 ? (bookCard.className = "fifth_book") : "";
+        }
+        bookCard.appendChild(bookArticle);
+
+        // Appending the bookCard to the container
+        bookContainer.append(bookCard);
+      })
+      .catch(handleFetchCatchError);
   });
 
-  // appending to DOM
-  document.querySelector(".popular_books").append(bookContainer);
+  // Appending the container to the DOM and hiding the loader
+  const popular_books = document.querySelector(".popular_books");
+  popular_books.append(bookContainer);
+
+  setTimeout(() => {
+    popular_books.classList.add("appear");
+    popular_books.classList.remove("hide");
+    document.querySelector(".loading_section").classList.add("hide");
+  }, 1000); // a timeout for hiding the loader and make the popular_books section appear
 };
 
 // Creates and displays a author card and display it to a .popular_authors section
 export const handleAuthorCard = function (authors, limit) {
-  const authorArray = limit ? authors.slice(0, 10) : authors;
+  const authorArray = limit ? getRandomAuthors(authors, 10) : authors;
 
   // Creating a section for all the authors
   const authorContainer = document.createElement("section");
@@ -89,7 +104,6 @@ export const handleAuthorCard = function (authors, limit) {
 
   authorArray.forEach((author) => {
     const authorId = author["author_id"];
-    //console.log(authorId);
     // Create an article for the author
     const authorArticle = document.createElement("article");
     authorArticle.className = "author_card";
@@ -107,13 +121,10 @@ export const handleAuthorCard = function (authors, limit) {
     </p>
     `;
 
-    // Create an anchor element around the authorCard
+    // Create an anchor element around the authorCard, and set href to send the id and author name
+    const authorNameURL = author.author_name.replaceAll(" ", "-");
     const authorCard = document.createElement("a");
-    // set eventlistener to set seesionStorage to storage the authors id for further use
-    authorCard.addEventListener("click", () => {
-      sessionStorage.setItem("author", authorId);
-    });
-    authorCard.href = `/author.html?${author.author_name}`;
+    authorCard.href = `/author.html?id=${authorId}&author=${authorNameURL}`;
     authorCard.appendChild(authorArticle);
 
     // Appending the authorCard to the container
@@ -123,3 +134,18 @@ export const handleAuthorCard = function (authors, limit) {
   // appending to DOM
   document.querySelector(".popular_authors").append(authorContainer);
 };
+
+function getRandomAuthors(array, count) {
+  const result = [];
+  const usedIndices = new Set();
+
+  while (result.length < count && result.length < array.length) {
+    const randomIndex = Math.floor(Math.random() * array.length);
+    if (!usedIndices.has(randomIndex)) {
+      usedIndices.add(randomIndex);
+      result.push(array[randomIndex]);
+    }
+  }
+
+  return result;
+}
