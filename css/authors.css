@@ -13,7 +13,7 @@ main {
     max-width: var(--size-335);
     .filter_section {
       margin-bottom: var(--size-2-5);
-      button {
+      ul {
         display: none;
       }
       #filter_dropdown {
@@ -49,21 +49,28 @@ main {
       overflow: scroll;
       .filter_section {
         margin-bottom: var(--size-2-5);
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--size-2-5);
-        button {
-          display: block;
-          background-color: var(--colorSecondary-100);
-          color: var(--colorNeutral-400);
-          padding: var(--size-2);
-          border: none;
-          border-radius: var(--size-2);
-        }
-        button:hover,
-        .chosen_btn {
-          background-color: var(--colorSecondary-200);
-          color: var(--colorNeutral-100);
+
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+          gap: var(--size-2-5);
+
+          li {
+            list-style: none;
+            button {
+              background-color: var(--colorSecondary-100);
+              color: var(--colorNeutral-400);
+              padding: var(--size-2);
+              border: none;
+              border-radius: var(--size-2);
+              width: var(--size-12);
+            }
+            button:hover,
+            .chosen_btn {
+              background-color: var(--colorSecondary-200);
+              color: var(--colorNeutral-100);
+            }
+          }
         }
         #filter_dropdown {
           display: none;
@@ -100,19 +107,7 @@ main {
         display: flex;
         flex-wrap: wrap;
         gap: var(--size-2-5);
-        button {
-          display: block;
-          background-color: var(--colorSecondary-100);
-          color: var(--colorNeutral-400);
-          padding: var(--size-2);
-          border: none;
-          border-radius: var(--size-2);
-        }
-        button:hover,
-        .chosen_btn {
-          background-color: var(--colorSecondary-200);
-          color: var(--colorNeutral-100);
-        }
+
         #filter_dropdown {
           display: none;
         }
