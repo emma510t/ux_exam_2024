@@ -89,7 +89,7 @@ export const handleAuthorCard = function (authors, limit) {
 
   authorArray.forEach((author) => {
     const authorId = author["author_id"];
-    console.log(authorId);
+    //console.log(authorId);
     // Create an article for the author
     const authorArticle = document.createElement("article");
     authorArticle.className = "author_card";
