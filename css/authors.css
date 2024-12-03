@@ -35,30 +35,50 @@ main {
     }
   }
 }
-@media (min-width: 500px) {
-  main {
-    #authors {
-      .filter_section {
-        #filter_dropdown {
-          max-width: var(--size-28);
-        }
-      }
-      .popular_authors .author_section {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-  }
-}
 
-/* Tablet */
-@media (min-width: 800px) {
+@media (min-width: 500px) {
   main {
     display: grid;
     gap: var(--size-5);
     grid-template-columns: repeat(3, 1fr);
     max-height: 100%;
-    position: relative;
     overflow: hidden;
+
+    #authors {
+      grid-column: 1/4;
+      overflow: scroll;
+      .filter_section {
+        margin-bottom: var(--size-2-5);
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--size-2-5);
+        button {
+          display: block;
+          background-color: var(--colorSecondary-100);
+          color: var(--colorNeutral-400);
+          padding: var(--size-2);
+          border: none;
+          border-radius: var(--size-2);
+        }
+        button:hover,
+        .chosen_btn {
+          background-color: var(--colorSecondary-200);
+          color: var(--colorNeutral-100);
+        }
+        #filter_dropdown {
+          display: none;
+        }
+      }
+      .popular_authors .author_section {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  main {
+    grid-template-columns: repeat(3, 1fr);
 
     #authors_image {
       display: block;
@@ -82,23 +102,20 @@ main {
         gap: var(--size-2-5);
         button {
           display: block;
-          background-color: var(--colorSecondary-200);
-          color: var(--colorNeutral-100);
+          background-color: var(--colorSecondary-100);
+          color: var(--colorNeutral-400);
           padding: var(--size-2);
           border: none;
           border-radius: var(--size-2);
         }
         button:hover,
         .chosen_btn {
-          background-color: var(--colorSecondary-100);
-          color: var(--colorNeutral-400);
+          background-color: var(--colorSecondary-200);
+          color: var(--colorNeutral-100);
         }
         #filter_dropdown {
           display: none;
         }
-      }
-      .popular_authors .author_section {
-        grid-template-columns: repeat(3, 1fr);
       }
     }
   }

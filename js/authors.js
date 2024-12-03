@@ -3,30 +3,33 @@ import { fetchAPI, handleAuthorCard } from "./common.js";
 fetchAPI("/authors", showAuthors);
 
 function showAuthors(authors) {
-  console.log(authors);
+  // start with filtering the authors with the letter a
   filterAuthors(authors, "a");
+
   const buttons = document.querySelector(".filter_section").getElementsByTagName("button");
+  const dropdown = document.querySelector("#dropdown");
+
+  // For every btn in the filter_section, add eventlisener for click
   for (const btn of buttons) {
-    //console.log(btn.value);
     btn.addEventListener("click", () => {
-      //   const old_chosen_btn = document.querySelector(".chosen_btn");
-      //   old_chosen_btn ? old_chosen_btn.classList.remove("chosen_btn") : "";
       document.querySelector(".chosen_btn").classList.remove("chosen_btn");
       btn.classList.add("chosen_btn");
       filterAuthors(authors, btn.value);
+      dropdown.value = btn.value;
     });
   }
-  const dropdown = document.querySelector("#dropdown");
+  // Eventlistener for the dropdown (in mobile)
   dropdown.addEventListener("change", (e) => {
     filterAuthors(authors, e.target.value);
+    document.querySelector(".chosen_btn").classList.remove("chosen_btn");
+    document.querySelector(`button[value="${e.target.value}"]`).classList.add("chosen_btn");
   });
-  //const authorWithA = allAuthors.filter((author) => author.author_name.startsWith("a"));
-  //handleAuthorCard(authors)
 }
 
 // filter authors according to letter of last name (or first if author only has one name)
 function filterAuthors(authors, letter) {
   document.querySelector(".popular_authors").innerHTML = "";
+
   const filteredArray = authors.filter((item) => {
     let name = item.author_name; // Get the author_name
     if (!name.includes(" ")) {
@@ -55,5 +58,3 @@ function filterAuthors(authors, letter) {
     handleAuthorCard(filteredArray);
   }
 }
-
-// make image fixed to the left and the rest scrollable
