@@ -14,6 +14,7 @@ const handleAPIError = (response) => {
 // Handles an error in a fetch request's .catch(), displaying an error message on the page
 export const handleFetchCatchError = (error, method, func_name) => {
   if (method === "GET") {
+    console.log(error);
     const errorSection = document.createElement("section");
     errorSection.innerHTML = `
     <h4>    
@@ -21,16 +22,19 @@ export const handleFetchCatchError = (error, method, func_name) => {
     </h4>
     <p>An error occurred while retrieving the data. Please come back later.</p>
     `;
+    // if page has loader, then hide it
+    if (document.querySelector(".loading_section")) {
+      document.querySelector(".loading_section").classList.add("hide");
+    }
+
     if (func_name.name === "handleBookCard") {
       document.querySelector(".popular_books").classList.remove("hide");
-      document.querySelector(".loading_section").classList.add("hide");
       document.querySelector(".popular_books").append(errorSection);
-      console.log(error);
-    } else {
+    } else if (func_name.name === "handleAuthorCard" || func_name.name === "showAuthors") {
       document.querySelector(".popular_authors").classList.remove("hide");
-      document.querySelector(".loading_section").classList.add("hide");
       document.querySelector(".popular_authors").append(errorSection);
-      console.log(error);
+    } else {
+      document.querySelector("main").append(errorSection);
     }
   } else {
     createToast(error, "negative");
@@ -40,7 +44,7 @@ export const handleFetchCatchError = (error, method, func_name) => {
 // function to fetch from API and calls a function with parameter if needed
 export const fetchAPI = (endpoint, func_name, parameter, options = {}) => {
   const method = options.method || "GET";
-  fetch(`${baseUrl}${endpoint}`, options)
+  fetch(`${baseUrl}${endpoint}f`, options)
     .then((response) => handleAPIError(response))
     .then((response) => func_name(response, parameter))
     .catch((error) => handleFetchCatchError(error, method, func_name));
