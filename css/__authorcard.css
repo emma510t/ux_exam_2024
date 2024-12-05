@@ -1,4 +1,4 @@
-.popular_authors {
+.authors_selection {
   .author_section {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -45,7 +45,7 @@
 
 /* Tablet */
 @media (min-width: 650px) {
-  .popular_authors {
+  .authors_selection {
     .author_section {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -57,7 +57,7 @@
 
 /* Desktop */
 @media (min-width: 1060px) {
-  .popular_authors {
+  .authors_selection {
     .author_section {
       grid-template-columns: repeat(5, 1fr);
     }

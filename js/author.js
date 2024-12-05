@@ -6,5 +6,6 @@ const authorName = urlParams.get("author").replaceAll("-", " ");
 
 document.querySelector("#author_title").innerText = authorName;
 document.querySelector("#bread_current").innerText = authorName;
+document.title = `BOOKS4U | ${authorName}`;
 
 fetchAPI(`/books?a=${authorId}`, handleBookCard, "author");
