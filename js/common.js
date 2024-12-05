@@ -34,7 +34,7 @@ export const handleFetchCatchError = (error, method, func_name) => {
       document.querySelector(".authors_selection").classList.remove("hide");
       document.querySelector(".authors_selection").append(errorSection);
     } else {
-      document.querySelector("main").append(errorSection);
+      document.querySelector("section").append(errorSection);
     }
   } else {
     createToast(error, "negative");
