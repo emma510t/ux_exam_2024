@@ -51,3 +51,60 @@ h2 {
   stroke-width: var(--size-0-5);
   height: var(--size-3-5);
 }
+
+.toast-container {
+  position: fixed;
+  bottom: var(--size-24); /* Move the container to the top */
+  left: 50%; /* Align it to the right */
+  transform: translateX(-50%);
+  max-width: 300px;
+  z-index: 9999; /* Ensure it appears above other elements */
+}
+
+.toast {
+  color: var(--colorNeutral-100);
+  padding: var(--size-2-5);
+  margin: auto;
+  margin-top: var(--size-2-5);
+  border-radius: var(--size-1);
+  width: fit-content;
+  display: flex;
+  gap: var(--size-2);
+}
+
+.toast.negative {
+  background-color: var(--colorWarning-100);
+}
+.toast.positive {
+  background-color: var(--colorSuccess-100);
+}
+
+.close-toast {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  & .icon-close {
+    color: var(--colorNeutral-100);
+    display: inline-block;
+    text-indent: -9999px;
+    overflow: hidden;
+    white-space: nowrap;
+    width: var(--size-3-5);
+    height: var(--size-3-5);
+    background: url("../assets/icons/close-icon-white.svg") no-repeat center center;
+    background-size: contain;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+}

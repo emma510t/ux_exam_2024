@@ -12,24 +12,33 @@ const handleAPIError = (response) => {
 };
 
 // Handles an error in a fetch request's .catch(), displaying an error message on the page
-export const handleFetchCatchError = (error, method) => {
-  const errorSection = document.createElement("section");
-  const action =
-    {
-      GET: "retrieving",
-      POST: "submitting",
-      PUT: "updating",
-      DELETE: "deleting",
-    }[method.toUpperCase()] || "processing";
-
-  errorSection.innerHTML = `
-        <h4>    
-            <h3>Data Error</h3>
-        </h4>
-        <p>An error occurred while ${action} the data.</p>
-        <p class="error">${error}</p>
+export const handleFetchCatchError = (error, method, func_name) => {
+  if (method === "GET") {
+    console.log(error);
+    const errorSection = document.createElement("section");
+    errorSection.innerHTML = `
+    <h4>    
+    <h3>Data Error</h3>
+    </h4>
+    <p>An error occurred while retrieving the data. Please come back later.</p>
     `;
-  document.querySelector("main").append(errorSection);
+    // if page has loader, then hide it
+    if (document.querySelector(".loading_section")) {
+      document.querySelector(".loading_section").classList.add("hide");
+    }
+
+    if (func_name.name === "handleBookCard") {
+      document.querySelector(".popular_books").classList.remove("hide");
+      document.querySelector(".popular_books").append(errorSection);
+    } else if (func_name.name === "handleAuthorCard" || func_name.name === "showAuthors") {
+      document.querySelector(".popular_authors").classList.remove("hide");
+      document.querySelector(".popular_authors").append(errorSection);
+    } else {
+      document.querySelector("main").append(errorSection);
+    }
+  } else {
+    createToast(error, "negative");
+  }
 };
 
 // function to fetch from API and calls a function with parameter if needed
@@ -38,7 +47,7 @@ export const fetchAPI = (endpoint, func_name, parameter, options = {}) => {
   fetch(`${baseUrl}${endpoint}`, options)
     .then((response) => handleAPIError(response))
     .then((response) => func_name(response, parameter))
-    .catch((error) => handleFetchCatchError(error, method));
+    .catch((error) => handleFetchCatchError(error, method, func_name));
 };
 
 // Creates and displays a book card and display it to a .popular_books section
@@ -160,4 +169,47 @@ function getRandomAuthors(array, count) {
   }
 
   return result;
+}
+
+function createToast(message, type) {
+  // Get the toast container or create one if it doesn't exist
+  let toastContainer = document.querySelector(".toast-container");
+
+  // Generate a unique ID for accessibility attributes
+  const toastId = `toast-${Date.now()}`;
+
+  // Create the toast element
+  const toast = document.createElement("div");
+  toast.classList.add("toast");
+
+  // Add ARIA and accessibility attributes
+  toast.setAttribute("role", "alert");
+  toast.setAttribute("aria-live", "assertive");
+  toast.setAttribute("aria-describedby", `${toastId}-description`);
+
+  // Add the type-specific class
+  if (type === "negative") {
+    toast.classList.add("negative");
+  } else if (type === "positive") {
+    toast.classList.add("positive");
+  }
+
+  // Set the toast content
+  toast.innerHTML = `
+    <p id="${toastId}-description">${message}</p>
+    <button class="close-toast" aria-label="Close this notification"><span class="icon-close">Close</span></button>
+  `;
+
+  // Add close functionality
+  toast.querySelector(".close-toast").addEventListener("click", () => {
+    toast.remove();
+  });
+
+  // Add the toast to the container
+  toastContainer.appendChild(toast);
+
+  // Auto remove the toast after 5 seconds
+  setTimeout(() => {
+    toast.remove();
+  }, 5000);
 }
