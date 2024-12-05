@@ -8,4 +8,4 @@ document.querySelector("#author_title").innerText = authorName;
 document.querySelector("#bread_current").innerText = authorName;
 document.title = `BOOKS4U | ${authorName}`;
 
-fetchAPI(`/books?a=${authorId}`, handleBookCard, "author");
+fetchAPI(`/books?a=${authorId}`, handleBookCard, { page: "author", author_id: authorId });

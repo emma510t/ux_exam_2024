@@ -42,16 +42,16 @@ export const handleFetchCatchError = (error, method, func_name) => {
 };
 
 // function to fetch from API and calls a function with parameter if needed
-export const fetchAPI = (endpoint, func_name, parameter, options = {}) => {
+export const fetchAPI = (endpoint, func_name, parameters, options = {}) => {
   const method = options.method || "GET";
   fetch(`${baseUrl}${endpoint}`, options)
     .then((response) => handleAPIError(response))
-    .then((response) => func_name(response, parameter))
+    .then((response) => func_name(response, parameters))
     .catch((error) => handleFetchCatchError(error, method, func_name));
 };
 
 // Creates and displays a book card and display it to a .popular_books section
-export const handleBookCard = function (books, page) {
+export const handleBookCard = function (books, parameters) {
   // Creating a container for all the books
   const bookContainer = document.createElement("section");
   bookContainer.className = "book_section";
@@ -73,7 +73,7 @@ export const handleBookCard = function (books, page) {
         const bookCover = bookData.cover !== "" ? bookData.cover : "/assets/images/book_placeholder.jpg";
 
         const subtitle =
-          page === "index" || page === "discover"
+          parameters.page === "index" || parameters.page === "discover"
             ? `<p>${bookData.author}</p>`
             : '<p>About the book <span><svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg"> <path d="M2 2L9 9" stroke-width="4" stroke-linecap="round" /> <path d="M2 16L9 9" stroke-width="4" stroke-linecap="round" /></svg></span></p>';
 
@@ -93,7 +93,7 @@ export const handleBookCard = function (books, page) {
         bookCard.href = `/book.html?id=${bookId}`;
 
         // If its the index page, then the fifth book will have special class
-        if (page === "index") {
+        if (parameters.page === "index") {
           index === 4 ? (bookCard.className = "fifth_book") : "";
         }
         bookCard.appendChild(bookArticle);
