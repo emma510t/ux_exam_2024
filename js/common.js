@@ -90,7 +90,7 @@ export const handleBookCard = function (books, page) {
 
         // Create an anchor element around the bookCard
         const bookCard = document.createElement("a");
-        bookCard.href = `/book?id=${bookId}`;
+        bookCard.href = `/book.html?id=${bookId}`;
 
         // If its the index page, then the fifth book will have special class
         if (page === "index") {

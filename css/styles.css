@@ -46,12 +46,6 @@ h2 {
   display: none;
 }
 
-#bread_crumb_divider {
-  stroke: var(--colorNeutral-300);
-  stroke-width: var(--size-0-5);
-  height: var(--size-3-5);
-}
-
 .toast-container {
   position: fixed;
   bottom: var(--size-24); /* Move the container to the top */
@@ -107,4 +101,42 @@ h2 {
   border: 0;
   clip: rect(0, 0, 0, 0);
   overflow: hidden;
+}
+
+#bread_crumbs {
+  display: flex;
+  gap: var(--size-2);
+  align-items: center;
+  margin-bottom: var(--size-2-5);
+  max-width: var(--size-335);
+
+  a {
+    color: var(--colorNeutral-400);
+    font-size: var(--size-3);
+    font-weight: 400;
+    text-decoration: underline;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  p {
+    color: var(--colorNeutral-400);
+    font-size: var(--size-3);
+    font-weight: 400;
+  }
+}
+#bread_crumb_divider {
+  stroke: var(--colorNeutral-300);
+  stroke-width: var(--size-0-5);
+  height: var(--size-3-5);
+}
+
+@media (min-width: 650px) {
+  main {
+    #bread_crumbs {
+      a {
+        text-decoration: none;
+      }
+    }
+  }
 }

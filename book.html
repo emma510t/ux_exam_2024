@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/book.css" />
+    <script src="js/book.js" type="module"></script>
+    <script src="js/navigation.js" type="module"></script>
+    <title>BOOKS4U</title>
+  </head>
+  <body>
+    <header>
+      <div class="prim-nav-m">
+        <h1>
+          <a href="index.html" title="Homepage">BOOKS 4 U</a>
+        </h1>
+        <div class="burger-menu-container">
+          <label class="burger-menu-label" for="burger-menu-checkbox">
+            <span class="burger-icon"></span>
+          </label>
+          <input type="checkbox" id="burger-menu-checkbox" />
+        </div>
+      </div>
+      <nav class="search_container">
+        <form class="search-box">
+          <div>
+            <label for="search">Search</label>
+            <input type="search" id="search" class="search-box__input" name="search" placeholder="Search" required="" autocomplete="on" />
+          </div>
+          <div>
+            <button type="reset" class="search-box_reset hidden"><span class="icon-close">Close</span></button>
+            <button type="submit" class="search-box_button"><span class="icon-search">Search</span></button>
+          </div>
+        </form>
+      </nav>
+      <nav class="prim-nav-d">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="discoverbooks.html">Discover books</a></li>
+          <li><a href="authors.html">Authors</a></li>
+        </ul>
+      </nav>
+      <nav class="utility-nav">
+        <ul>
+          <li><a href="login.html" id="login-link">Log in</a></li>
+          <li><a href="signup.html" id="signup-link">Sign up</a></li>
+          <li>
+            <a href="admin.html" id="admin-link"><span class="profile-icon"></span>Admin</a>
+          </li>
+          <li>
+            <a href="profile.html" id="profile-link"><span class="profile-icon"></span>Profile</a>
+          </li>
+          <li><button id="logout-btn">Log out</button></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="bread_crumbs">
+        <a href="/authors.html">Authors</a>
+        <svg id="bread_crumb_divider" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 2L9 9" stroke-linecap="round" />
+          <path d="M2 16L9 9" stroke-linecap="round" />
+        </svg>
+        <p id="bread_current">Author name</p>
+        <svg id="bread_crumb_divider" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 2L9 9" stroke-linecap="round" />
+          <path d="M2 16L9 9" stroke-linecap="round" />
+        </svg>
+        <p id="bread_current">Book title</p>
+      </section>
+      <article id="book_singleview">
+        <div>
+          <h2>Book title</h2>
+          <p id="author_name">Author name</p>
+          <button id="loan_btn" class="hide">Loan the book</button>
+          <section id="publisher_info" class="info_box">
+            <div>
+              <p>Publishing company</p>
+              <p class="info_text">publisher</p>
+            </div>
+            <div>
+              <p>Publishing year</p>
+              <p class="info_text">2024</p>
+            </div>
+          </section>
+          <section id="loan_info" class="hide">
+            <h3>Loan history</h3>
+            <div class="info_box">
+              <div>
+                <p id="date">Date of loan</p>
+                <p class="info_text" id="main">user email</p>
+              </div>
+            </div>
+          </section>
+        </div>
+        <img src="assets/images/book_placeholder.jpg" alt="" id="book_cover" />
+      </article>
+    </main>
+    <footer><p>&copy; UX exam 2024</p></footer>
+  </body>
+</html>
