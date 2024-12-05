@@ -1,25 +1,7 @@
-import { fetchAPI } from "./common.js";
+import { fetchAPI, handleValidationError, formattedDate, isYoungerThan13 } from "./common.js";
 
 // Set the maximum date for the userDOB input
-document.getElementById("userDOB").max = new Date(new Date().setFullYear(new Date().getFullYear() - 13)).toISOString().split("T")[0];
-
-// Helper function to handle error messages
-function handleError(input, message) {
-  const errorMessage = input.nextElementSibling;
-  if (errorMessage) {
-    if (message) {
-      errorMessage.textContent = message;
-      errorMessage.classList.remove("hidden");
-      input.classList.add("invalid");
-    } else {
-      errorMessage.textContent = "";
-      errorMessage.classList.add("hidden");
-      input.classList.remove("invalid");
-    }
-  } else {
-    console.warn("Error message element not found for:", input);
-  }
-}
+document.getElementById("userDOB").max = formattedDate();
 
 // Handle form submission
 document.querySelector("#formSignup").addEventListener("submit", async (e) => {
@@ -31,9 +13,9 @@ document.querySelector("#formSignup").addEventListener("submit", async (e) => {
   document.querySelectorAll("#formSignup input").forEach((input) => {
     if (!input.checkValidity()) {
       isValid = false;
-      handleError(input, input.title);
+      handleValidationError(input, input.title);
     } else {
-      handleError(input, "");
+      handleValidationError(input, "");
     }
   });
 
@@ -42,14 +24,14 @@ document.querySelector("#formSignup").addEventListener("submit", async (e) => {
   const birthDate = new Date(e.target.userDOB.value);
 
   // Validate age (13 years old minimum)
-  if (new Date() - birthDate < 13 * 365.25 * 24 * 60 * 60 * 1000) {
-    handleError(e.target.userDOB, "You must be at least 13 years old to sign up.");
+  if (isYoungerThan13(birthDate)) {
+    handleValidationError(e.target.userDOB, "You must be at least 13 years old to sign up.");
     isValid = false;
   }
 
   // Validate password match
   if (password !== repeatPassword) {
-    handleError(e.target.userRepeatPassword, "Passwords do not match.");
+    handleValidationError(e.target.userRepeatPassword, "Passwords do not match.");
     isValid = false;
   }
 
@@ -73,15 +55,15 @@ document.querySelector("#formSignup").addEventListener("submit", async (e) => {
 document.querySelectorAll("#formSignup input").forEach((input) => {
   input.addEventListener("input", () => {
     if (!input.checkValidity()) {
-      handleError(input, input.title);
+      handleValidationError(input, input.title);
     } else {
-      handleError(input, "");
+      handleValidationError(input, "");
     }
   });
 
   input.addEventListener("blur", () => {
     if (!input.checkValidity()) {
-      handleError(input, input.title);
+      handleValidationError(input, input.title);
     }
   });
 });
@@ -110,8 +92,8 @@ document.querySelector("#formSignup #userRepeatPassword").addEventListener("inpu
   const repeatPassword = document.querySelector("#userRepeatPassword").value.trim();
 
   if (password === repeatPassword) {
-    handleError(document.querySelector("#userRepeatPassword"), ""); // Clear error when passwords match
+    handleValidationError(document.querySelector("#userRepeatPassword"), ""); // Clear error when passwords match
   } else {
-    handleError(document.querySelector("#userRepeatPassword"), "Passwords do not match.");
+    handleValidationError(document.querySelector("#userRepeatPassword"), "Passwords do not match.");
   }
 });

@@ -34,7 +34,7 @@ if (loggedInUserID()) {
                             <dd>${userData.membership_date}</dd>
                         </div>
                     </dl>
-                    <a href="edit_profile.html" class="btn_ghost"><span class="edit-icon"></span>Edit Profile</a>
+                    <a href="editprofile.html" class="btn_ghost"><span class="edit-icon"></span>Edit Profile</a>
       `;
       document.querySelector("#profile-section").appendChild(profile);
     });
