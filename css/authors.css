@@ -76,7 +76,7 @@ main {
           display: none;
         }
       }
-      .popular_authors .author_section {
+      .authors_selection .author_section {
         grid-template-columns: repeat(3, 1fr);
       }
     }

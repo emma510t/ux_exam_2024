@@ -31,8 +31,8 @@ export const handleFetchCatchError = (error, method, func_name) => {
       document.querySelector(".popular_books").classList.remove("hide");
       document.querySelector(".popular_books").append(errorSection);
     } else if (func_name.name === "handleAuthorCard" || func_name.name === "showAuthors") {
-      document.querySelector(".popular_authors").classList.remove("hide");
-      document.querySelector(".popular_authors").append(errorSection);
+      document.querySelector(".authors_selection").classList.remove("hide");
+      document.querySelector(".authors_selection").append(errorSection);
     } else {
       document.querySelector("main").append(errorSection);
     }
@@ -115,7 +115,7 @@ export const handleBookCard = function (books, page) {
   }, 1000); // a timeout for hiding the loader and make the popular_books section appear
 };
 
-// Creates and displays a author card and display it to a .popular_authors section
+// Creates and displays a author card and display it to a .authors_selection section
 export const handleAuthorCard = function (authors, limit) {
   const authorArray = limit ? getRandomAuthors(authors, 10) : authors;
 
@@ -153,7 +153,7 @@ export const handleAuthorCard = function (authors, limit) {
   });
 
   // appending to DOM
-  document.querySelector(".popular_authors").append(authorContainer);
+  document.querySelector(".authors_selection").append(authorContainer);
 };
 
 function getRandomAuthors(array, count) {

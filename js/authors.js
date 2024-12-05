@@ -28,7 +28,7 @@ function showAuthors(authors) {
 
 // filter authors according to letter of last name (or first if author only has one name)
 function filterAuthors(authors, letter) {
-  document.querySelector(".popular_authors").innerHTML = "";
+  document.querySelector(".authors_selection").innerHTML = "";
 
   const filteredArray = authors.filter((item) => {
     let name = item.author_name; // Get the author_name
@@ -53,7 +53,7 @@ function filterAuthors(authors, letter) {
     return 0; // they are equal
   });
   if (filteredArray.length < 1) {
-    document.querySelector(".popular_authors").innerHTML = `<p>No authors starting with "${letter}", sadly</p>`;
+    document.querySelector(".authors_selection").innerHTML = `<p>No authors starting with "${letter}", sadly</p>`;
   } else {
     handleAuthorCard(filteredArray);
   }
