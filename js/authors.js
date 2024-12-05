@@ -1,6 +1,6 @@
 import { fetchAPI, handleAuthorCard } from "./common.js";
 
-fetchAPI("/authors", showAuthors);
+fetchAPI("/authors", ".authors_selection", showAuthors);
 
 function showAuthors(authors) {
   // start with filtering the authors with the letter a

@@ -12,6 +12,7 @@ document.querySelector("#formLogin").addEventListener("submit", (e) => {
 
   fetchAPI(
     "/users/login",
+    null,
     (response) => {
       if (Object.keys(response).includes("user_id")) {
         sessionStorage.setItem("b4u_user_id", response.user_id);
