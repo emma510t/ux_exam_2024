@@ -1,5 +1,5 @@
 main {
-  padding: var(--size-2-5);
+  padding: var(--size-4) var(--size-2-5);
   #book_singleview {
     color: var(--colorNeutral-400);
     font-size: var(--size-3-5);
@@ -50,21 +50,25 @@ main {
   main {
     display: grid;
     justify-content: center;
+    padding: var(--size-4) var(--size-2-5);
 
     #book_singleview {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      max-width: var(--size-335);
+      #book_view {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--size-5);
+        max-width: var(--size-335);
 
-      > div {
-        grid-column: 2/4;
-        grid-row: 1/2;
-      }
+        > div {
+          grid-column: 2/4;
+          grid-row: 1/2;
+        }
 
-      #book_cover {
-        grid-column: 1/2;
-        grid-row: 1/2;
-        width: var(--size-80);
+        #book_cover {
+          grid-column: 1/2;
+          grid-row: 1/2;
+          width: var(--size-80);
+        }
       }
     }
   }
