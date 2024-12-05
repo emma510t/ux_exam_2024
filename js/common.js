@@ -44,7 +44,7 @@ export const handleFetchCatchError = (error, method, func_name) => {
 // function to fetch from API and calls a function with parameter if needed
 export const fetchAPI = (endpoint, func_name, parameter, options = {}) => {
   const method = options.method || "GET";
-  fetch(`${baseUrl}${endpoint}f`, options)
+  fetch(`${baseUrl}${endpoint}`, options)
     .then((response) => handleAPIError(response))
     .then((response) => func_name(response, parameter))
     .catch((error) => handleFetchCatchError(error, method, func_name));
