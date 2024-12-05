@@ -213,3 +213,13 @@ function createToast(message, type) {
     toast.remove();
   }, 5000);
 }
+
+export const loggedInUserID = () => {
+  return sessionStorage.getItem("b4u_user_id");
+};
+
+export const logout = () => {
+  // remove user_id from storage
+  sessionStorage.removeItem("b4u_user_id");
+  window.location.replace("http://127.0.0.1:5500/login.html");
+};
