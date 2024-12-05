@@ -1,4 +1,4 @@
-import { fetchAPI, loggedInUserID, isYoungerThan13, handleValidationError, formattedDate } from "./common.js";
+import { fetchAPI, loggedInUserID, isYoungerThan13, handleValidationError, formattedDate, logout } from "./common.js";
 
 if (loggedInUserID()) {
   if (loggedInUserID() == 2679) {
@@ -114,6 +114,7 @@ if (loggedInUserID()) {
 document.querySelector("#formDeleteProfile").addEventListener("submit", async (e) => {
   e.preventDefault();
   if (e.target.delete_confirmation.checked) {
+    logout();
     deleteUser();
   } else {
     handleValidationError(e.target.delete_confirmation, "You must checck the checkbox to delete your account");
