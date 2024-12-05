@@ -1,14 +1,41 @@
 import { fetchAPI } from "./common.js";
 
 const urlParams = new URLSearchParams(window.location.search);
-const authorId = urlParams.get("id");
+const bookId = urlParams.get("id");
 
-fetchAPI(`/books/${authorId}`, showBook);
+fetchAPI(`/books/${bookId}`, showBook);
 
 function showBook(book) {
   document.title = `BOOKS4U | ${book.title}`;
-  //   document.querySelector("#bread_current_author").innerText = book.author;
-  //   document.querySelector("#bread_current_book").innerText = book.title;
+
+  let bread_crumb = "";
+
+  // create breadcrumbs
+  if (urlParams.get("author")) {
+    const authorId = urlParams.get("author");
+    bread_crumb = `<section id="bread_crumbs">
+          <a href="authors.html">Authors</a>
+          <svg id="bread_crumb_divider" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 2L9 9" stroke-linecap="round" />
+            <path d="M2 16L9 9" stroke-linecap="round" />
+          </svg>
+          <a id="bread_current_author" href="/author.html/id=${authorId}" >${book.author}</a>
+          <svg id="bread_crumb_divider" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 2L9 9" stroke-linecap="round" />
+            <path d="M2 16L9 9" stroke-linecap="round" />
+          </svg>
+          <p id="bread_current_book">${book.title}</p>
+        </section>`;
+  } else {
+    bread_crumb = `<section id="bread_crumbs">
+      <a href="discoverbooks.html">Discover books</a>
+      <svg id="bread_crumb_divider" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2L9 9" stroke-linecap="round" />
+        <path d="M2 16L9 9" stroke-linecap="round" />
+      </svg>
+      <p id="bread_current_book">${book.title}</p>
+    </section>`;
+  }
 
   const book_section = document.querySelector(".book_singleview");
   // add all information inside
@@ -26,19 +53,7 @@ function showBook(book) {
   // // ændre breadcrumb ved author ???
 
   const book_singleview = document.createElement("div");
-  book_singleview.innerHTML = `<section id="bread_crumbs">
-        <a href="/authors.html">Authors</a>
-        <svg id="bread_crumb_divider" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 2L9 9" stroke-linecap="round" />
-          <path d="M2 16L9 9" stroke-linecap="round" />
-        </svg>
-        <a id="bread_current_author" href="/author.html/id=????" >${book.author}</a>
-        <svg id="bread_crumb_divider" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 2L9 9" stroke-linecap="round" />
-          <path d="M2 16L9 9" stroke-linecap="round" />
-        </svg>
-        <p id="bread_current_book">Book title</p>
-      </section>
+  book_singleview.innerHTML = `${bread_crumb}
       <article id="book_singleview">
         <div>
           <h2>Book title</h2>

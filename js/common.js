@@ -90,7 +90,12 @@ export const handleBookCard = function (books, parameters) {
 
         // Create an anchor element around the bookCard
         const bookCard = document.createElement("a");
-        bookCard.href = `/book.html?id=${bookId}`;
+        // bookCard.href = `/book.html?id=${bookId}`;
+        if (parameters.author_id !== undefined) {
+          bookCard.href = `book.html?id=${bookId}&author=${parameters.author_id}`;
+        } else {
+          bookCard.href = `book.html?id=${bookId}`;
+        }
 
         // If its the index page, then the fifth book will have special class
         if (parameters.page === "index") {
@@ -146,7 +151,7 @@ export const handleAuthorCard = function (authors, limit) {
     // Create an anchor element around the authorCard, and set href to send the id and author name
     const authorNameURL = author.author_name.replaceAll(" ", "-");
     const authorCard = document.createElement("a");
-    authorCard.href = `/author.html?id=${authorId}&author=${authorNameURL}`;
+    authorCard.href = `author.html?id=${authorId}&author=${authorNameURL}`;
     authorCard.appendChild(authorArticle);
 
     // Appending the authorCard to the container
