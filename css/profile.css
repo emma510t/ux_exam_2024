@@ -88,12 +88,10 @@ main {
     display: grid;
     width: 100%;
     margin: 0 auto;
-    /* grid-template-columns: repeat(3, 1fr); */
     aside {
       grid-column: span 1;
     }
     section.profile {
-      /* grid-column: span 2; */
       dl {
         display: grid;
         grid-template-columns: max-content 1fr max-content;
