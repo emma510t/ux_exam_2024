@@ -4,7 +4,7 @@ if (loggedInUserID()) {
   if (loggedInUserID() == 2679) {
     window.location.replace("http://127.0.0.1:5500/admin.html");
   } else {
-    fetchAPI(`/users/${loggedInUserID()}`, (userData) => {
+    fetchAPI(`/users/${loggedInUserID()}`, "section", (userData) => {
       const profile = document.createElement("article");
 
       profile.innerHTML = `
