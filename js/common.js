@@ -12,7 +12,7 @@ const handleAPIError = (response) => {
 };
 
 // Handles an error in a fetch request's .catch(), displaying an error message on the page
-export const handleFetchCatchError = (error, method, func_name) => {
+export const handleFetchCatchError = (error, method, func_name, errorDestination) => {
   if (method === "GET") {
     console.log(error);
     const errorSection = document.createElement("section");
@@ -28,13 +28,13 @@ export const handleFetchCatchError = (error, method, func_name) => {
     }
 
     if (func_name.name === "handleBookCard") {
-      document.querySelector(".popular_books").classList.remove("hide");
-      document.querySelector(".popular_books").append(errorSection);
+      document.querySelector(errorDestination).classList.remove("hide");
+      document.querySelector(errorDestination).append(errorSection);
     } else if (func_name.name === "handleAuthorCard" || func_name.name === "showAuthors") {
-      document.querySelector(".authors_selection").classList.remove("hide");
-      document.querySelector(".authors_selection").append(errorSection);
+      document.querySelector(errorDestination).classList.remove("hide");
+      document.querySelector(errorDestination).append(errorSection);
     } else {
-      document.querySelector("main").append(errorSection);
+      document.querySelector(errorDestination).append(errorSection);
     }
   } else {
     createToast(error, "negative");
@@ -42,7 +42,7 @@ export const handleFetchCatchError = (error, method, func_name) => {
 };
 
 // function to fetch from API and calls a function with parameter if needed
-export const fetchAPI = (endpoint, func_name, parameters, options = {}) => {
+export const fetchAPI = (endpoint, errorDestination, func_name, parameters, options = {}) => {
   const method = options.method || "GET";
   fetch(`${baseUrl}${endpoint}`, options)
     .then((response) => handleAPIError(response))

@@ -40,6 +40,12 @@ h2 {
 }
 
 .btn_ghost {
+  padding: var(--size-2) var(--size-3);
+  border: none;
+  border-radius: var(--size-2);
+  font-size: var(--size-3-5);
+  font-weight: 700;
+  color: var(--colorPrimary-200);
 }
 
 .hide {
