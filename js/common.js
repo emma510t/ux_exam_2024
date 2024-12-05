@@ -47,7 +47,7 @@ export const fetchAPI = (endpoint, errorDestination, func_name, parameters, opti
   fetch(`${baseUrl}${endpoint}`, options)
     .then((response) => handleAPIError(response))
     .then((response) => func_name(response, parameters))
-    .catch((error) => handleFetchCatchError(error, method, func_name));
+    .catch((error) => handleFetchCatchError(error, method, func_name, errorDestination));
 };
 
 // Creates and displays a book card and display it to a .popular_books section
