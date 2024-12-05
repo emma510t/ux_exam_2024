@@ -38,6 +38,27 @@ main {
         font-weight: 500;
       }
     }
+    .loan_info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      margin: var(--size-3-5) 0;
+      gap: var(--size-5-5);
+      background-color: var(--colorPrimary-100);
+      padding: var(--size-4);
+      border-radius: var(--size-3);
+      width: var(--size-64);
+
+      h4 {
+        font-size: var(--size-3-5);
+        font-weight: 400;
+        justify-self: end;
+      }
+      .info_text {
+        font-size: var(--size-4);
+        font-weight: 500;
+      }
+    }
 
     #book_cover {
       width: 100%;

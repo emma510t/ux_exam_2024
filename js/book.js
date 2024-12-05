@@ -1,18 +1,34 @@
-import { fetchAPI } from "./common.js";
+import { fetchAPI, loggedInUserID } from "./common.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const bookId = urlParams.get("id");
+let loan_btn = "";
+let loan_history = "";
 
-fetchAPI(`/books/${bookId}`, showBook);
+// if this fetch books else fetch admin books
+if (loggedInUserID() == 2679) {
+  fetchAPI(`/admin/books/${bookId}`, "main", showBook);
+} else {
+  fetchAPI(`/books/${bookId}`, "main", showBook);
+}
 
 function showBook(book) {
   document.title = `BOOKS4U | ${book.title}`;
 
-  const loan_btn = document.querySelector("#loan_btn");
-  // display none if not user logged in or if user is admin
-  // display if user is logged in (and not admin)
-  const loan_history = document.querySelector("#loan_info");
-  // display none if not logged in as admin
+  if (loggedInUserID() && loggedInUserID() != 2679) {
+    loan_btn = '<button id="loan_btn">Loan the book</button>';
+  }
+
+  if (book["loans"]) {
+    loan_history = '<section id="loan_info"><h3>Loan history</h3>';
+    console.log(book["loans"]);
+
+    book["loans"].forEach((loan) => {
+      const loan_section = `<article class="loan_info"><h4>Loan date</h4><p class="info_text">${loan.loan_date}</p><h4>User id</h4><p class="info_text">${loan.user_id}</p></article>`;
+      loan_history = loan_history + loan_section;
+    });
+    loan_history = loan_history + "</section>";
+  }
 
   // create breadcrumbs depending on which page was the preverius
   const bread_crumb = document.createElement("div");
@@ -51,7 +67,7 @@ function showBook(book) {
         <div>
           <h2>${book.title}</h2>
           <p id="author_name">${book.author}</p>
-          <button id="loan_btn" class="hide">Loan the book</button>
+          ${loan_btn}
           <section id="publisher_info" class="info_box">
             <div>
               <p>Publishing company</p>
@@ -62,15 +78,7 @@ function showBook(book) {
               <p class="info_text">${book.publishing_year}</p>
             </div>
           </section>
-          <section id="loan_info" class="hide">
-            <h3>Loan history</h3>
-            <div class="info_box">
-              <div>
-                <p id="date">Date of loan</p>
-                <p class="info_text" id="main">user email</p>
-              </div>
-            </div>
-          </section>
+        ${loan_history}
         </div>
         <img src=${bookCover} alt="The cover of the book: ${book.title}" id="book_cover" />`;
 
@@ -79,11 +87,10 @@ function showBook(book) {
   const book_section = document.querySelector("#book_singleview");
   book_section.append(book_content);
 
-  console.log(book);
-
   setTimeout(() => {
     document.querySelector(".loading_section").classList.add("hide");
     book_section.classList.add("appear");
+    bread_crumb_container.classList.add("appear");
     book_section.classList.remove("hide");
     bread_crumb_container.classList.remove("hide");
   }, 1000); // a timeout for hiding the loader and make the book_section appear
