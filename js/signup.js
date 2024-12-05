@@ -92,6 +92,7 @@ function submitFormData(formData) {
 
   fetchAPI(
     "/users",
+    null,
     (response) => {
       console.log("Signup successful:", response);
       window.location.replace("http://127.0.0.1:5500/login.html");
