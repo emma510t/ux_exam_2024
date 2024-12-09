@@ -37,6 +37,9 @@ export const handleFetchCatchError = (error, method, func_name, errorDestination
       document.querySelector(errorDestination).append(errorSection);
     }
   } else {
+    if (func_name.name === "makeBookLoan") {
+      error = "You already have a loan";
+    }
     createToast(error, "negative");
   }
 };

@@ -1,11 +1,12 @@
-import { fetchAPI, loggedInUserID } from "./common.js";
+import { fetchAPI, loggedInUserID, baseUrl, handleAPIError } from "./common.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const bookId = urlParams.get("id");
-let loan_btn = "";
+
+let loan_information = "";
 let loan_history = "";
 
-// if this fetch books else fetch admin books
+// fetch book info according to who the user is
 if (loggedInUserID() == 2679) {
   fetchAPI(`/admin/books/${bookId}`, "main", showBook);
 } else {
@@ -16,7 +17,7 @@ function showBook(book) {
   document.title = `BOOKS4U | ${book.title}`;
 
   if (loggedInUserID() && loggedInUserID() != 2679) {
-    loan_btn = '<button id="loan_btn">Loan the book</button>';
+    loan_information = '<section id="loan_information"><button id="loan_btn">Loan the book</button></section>';
   }
 
   if (book["loans"]) {
@@ -67,7 +68,7 @@ function showBook(book) {
         <div>
           <h2>${book.title}</h2>
           <p id="author_name">${book.author}</p>
-          ${loan_btn}
+          ${loan_information}
           <section id="publisher_info" class="info_box">
             <div>
               <p>Publishing company</p>
@@ -86,6 +87,28 @@ function showBook(book) {
   bread_crumb_container.append(bread_crumb);
   const book_section = document.querySelector("#book_singleview");
   book_section.append(book_content);
+
+  const loan_btn = document.querySelector("#loan_btn");
+  if (loan_btn) {
+    loan_btn.addEventListener("click", () => {
+      const user_id = loggedInUserID();
+      fetchAPI(
+        `/users/${user_id}/books/${bookId}`,
+        "main",
+        function makeBookLoan(response) {
+          const loan_text = document.createElement("p");
+          loan_text.id = "loan_text";
+          loan_text.innerText = "Book loaned. Check you email for the access link - Enjoy!";
+          document.querySelector("#loan_information").append(loan_text);
+          console.log("book loaned");
+        },
+        null,
+        {
+          method: "POST",
+        }
+      );
+    });
+  }
 
   setTimeout(() => {
     document.querySelector(".loading_section").classList.add("hide");

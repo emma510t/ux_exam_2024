@@ -23,6 +23,17 @@ main {
       background-color: var(--colorPrimary-100);
       color: var(--colorNeutral-400);
     }
+    /* button:disabled {
+      cursor: default;
+      background-color: var(--colorNeutral-300);
+      color: var(--colorNeutral-100);
+    } */
+
+    #loan_text {
+      margin-top: var(--size-2-5);
+      font-weight: 500;
+      color: var(--colorPrimary-200);
+    }
 
     .info_box {
       display: flex;
@@ -39,7 +50,6 @@ main {
       }
     }
     #loan_info_container {
-
       .loan_info {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -49,7 +59,7 @@ main {
         background-color: var(--colorPrimary-100);
         padding: var(--size-4);
         border-radius: var(--size-3);
-  
+
         h4 {
           font-size: var(--size-3-5);
           font-weight: 400;
@@ -97,7 +107,7 @@ main {
   }
 }
 
-@media (min-width: 900px){
+@media (min-width: 900px) {
   main {
     #book_singleview {
       padding: var(--size-2-5) 0;
@@ -106,7 +116,7 @@ main {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: var(--size-5);
-  
+
         h3 {
           grid-column: 1/-1;
         }
