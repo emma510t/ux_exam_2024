@@ -38,25 +38,27 @@ main {
         font-weight: 500;
       }
     }
-    .loan_info {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      margin: var(--size-3-5) 0;
-      gap: var(--size-5-5);
-      background-color: var(--colorPrimary-100);
-      padding: var(--size-4);
-      border-radius: var(--size-3);
-      width: var(--size-64);
+    #loan_info_container {
 
-      h4 {
-        font-size: var(--size-3-5);
-        font-weight: 400;
-        justify-self: end;
-      }
-      .info_text {
-        font-size: var(--size-4);
-        font-weight: 500;
+      .loan_info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        margin: var(--size-3-5) 0;
+        gap: var(--size-5-5);
+        background-color: var(--colorPrimary-100);
+        padding: var(--size-4);
+        border-radius: var(--size-3);
+  
+        h4 {
+          font-size: var(--size-3-5);
+          font-weight: 400;
+          justify-self: end;
+        }
+        .info_text {
+          font-size: var(--size-4);
+          font-weight: 500;
+        }
       }
     }
 
@@ -95,12 +97,34 @@ main {
   }
 }
 
+@media (min-width: 900px){
+  main {
+    #book_singleview {
+      padding: var(--size-2-5) 0;
+
+      #loan_info_container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--size-5);
+  
+        h3 {
+          grid-column: 1/-1;
+        }
+        .loan_info {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
 /* Desktop */
 @media (min-width: 1060px) {
   main {
     #book_singleview {
-      padding: var(--size-2-5) 0;
-      grid-template-columns: repeat(4, 1fr);
+      #loan_info_container {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
     }
   }
 }

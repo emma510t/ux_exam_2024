@@ -20,7 +20,7 @@ function showBook(book) {
   }
 
   if (book["loans"]) {
-    loan_history = '<section id="loan_info"><h3>Loan history</h3>';
+    loan_history = '<section id="loan_info_container"><h3>Loan history</h3>';
     console.log(book["loans"]);
 
     book["loans"].forEach((loan) => {
@@ -30,7 +30,7 @@ function showBook(book) {
     loan_history = loan_history + "</section>";
   }
 
-  // create breadcrumbs depending on which page was the preverius
+  // create breadcrumbs depending on which page was the previus
   const bread_crumb = document.createElement("div");
   bread_crumb.id = "bread_crumbs";
   if (urlParams.get("author")) {
