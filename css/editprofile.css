@@ -84,9 +84,6 @@ main {
 }
 
 @media (min-width: 550px) {
-  h2 {
-    /* margin-top: clamp(var(--size-6), -2.6748rem + 9.1503vw, var(--size-20)); */
-  }
   main {
     flex-grow: 1;
     padding-top: 0;

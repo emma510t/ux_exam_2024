@@ -127,7 +127,7 @@ function submitFormData(formData) {
 
   fetchAPI(
     `/users/${loggedInUserID()}`,
-    null,
+    null, //null because not-get goes to toast
     (response) => {
       console.log("Update successful:", response);
       window.location.replace("http://127.0.0.1:5500/profile.html");
@@ -143,7 +143,7 @@ function submitFormData(formData) {
 function deleteUser() {
   fetchAPI(
     `/users/${loggedInUserID()}`,
-    null,
+    null, //null because not-get goes to toast
     (response) => {
       console.log("Deleted:", response);
       window.location.replace("http://127.0.0.1:5500/login.html");

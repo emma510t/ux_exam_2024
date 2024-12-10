@@ -227,11 +227,11 @@ export const logout = () => {
 
 export function isYoungerThan13(birthDate) {
   const today = new Date();
-  const age = today.getFullYear() - birthDate.getFullYear();
+  let age = today.getFullYear() - birthDate.getFullYear();
 
   // Check if the birth month and day are ahead of today's month and day
   if (today.getMonth() < birthDate.getMonth() || (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())) {
-    return age < 13;
+    age--;
   }
 
   return age < 13;
