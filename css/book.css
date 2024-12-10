@@ -1,0 +1,140 @@
+main {
+  padding: var(--size-4) var(--size-2-5);
+  #book_singleview {
+    color: var(--colorNeutral-400);
+    font-size: var(--size-3-5);
+    font-weight: 400;
+
+    h2 {
+      margin-top: var(--size-2-5);
+      margin-bottom: var(--size-2-5);
+    }
+
+    button {
+      background-color: var(--colorPrimary-200);
+      color: var(--colorNeutral-100);
+      font-weight: 700;
+      padding: var(--size-2);
+      border: none;
+      border-radius: var(--size-2);
+      margin-top: var(--size-3-5);
+    }
+    button:hover {
+      background-color: var(--colorPrimary-100);
+      color: var(--colorNeutral-400);
+    }
+    button:disabled {
+      cursor: default;
+      background-color: var(--colorNeutral-300);
+      color: var(--colorNeutral-100);
+    }
+
+    #loan_text {
+      margin-top: var(--size-2-5);
+      font-weight: 500;
+      color: var(--colorPrimary-200);
+    }
+
+    .info_box {
+      display: flex;
+      flex-direction: column;
+      margin: var(--size-3-5) 0;
+      gap: var(--size-5-5);
+      background-color: var(--colorPrimary-100);
+      padding: var(--size-4);
+      border-radius: var(--size-3);
+
+      .info_text {
+        font-size: var(--size-4);
+        font-weight: 500;
+      }
+    }
+    #loan_info_container {
+      .loan_info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        margin: var(--size-3-5) 0;
+        gap: var(--size-5-5);
+        background-color: var(--colorPrimary-100);
+        padding: var(--size-4);
+        border-radius: var(--size-3);
+
+        h4 {
+          font-size: var(--size-3-5);
+          font-weight: 400;
+          justify-self: end;
+        }
+        .info_text {
+          font-size: var(--size-4);
+          font-weight: 500;
+        }
+      }
+    }
+
+    #book_cover {
+      width: 100%;
+    }
+  }
+}
+
+/* Tablet */
+@media (min-width: 650px) {
+  main {
+    display: grid;
+    justify-content: center;
+    padding: var(--size-4) var(--size-2-5);
+
+    #book_singleview {
+      #book_view {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--size-5);
+        max-width: var(--size-335);
+
+        > div {
+          grid-column: 2/4;
+          grid-row: 1/2;
+        }
+
+        #book_cover {
+          grid-column: 1/2;
+          grid-row: 1/2;
+          width: var(--size-80);
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 900px) {
+  main {
+    #book_singleview {
+      padding: var(--size-2-5) 0;
+
+      #loan_info_container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--size-5);
+
+        h3 {
+          grid-column: 1/-1;
+        }
+        .loan_info {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+/* Desktop */
+@media (min-width: 1060px) {
+  main {
+    #book_singleview {
+      #loan_info_container {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+  }
+}

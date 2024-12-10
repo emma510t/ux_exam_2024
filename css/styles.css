@@ -52,12 +52,6 @@ h2 {
   display: none;
 }
 
-#bread_crumb_divider {
-  stroke: var(--colorNeutral-300);
-  stroke-width: var(--size-0-5);
-  height: var(--size-3-5);
-}
-
 .toast-container {
   position: fixed;
   bottom: var(--size-24); /* Move the container to the top */
@@ -113,4 +107,54 @@ h2 {
   border: 0;
   clip: rect(0, 0, 0, 0);
   overflow: hidden;
+}
+
+#bread_crumbs {
+  display: flex;
+  gap: var(--size-2);
+  align-items: center;
+  margin-bottom: var(--size-2-5);
+  max-width: var(--size-335);
+  margin-top: var(--size-4);
+
+  a {
+    color: var(--colorPrimary-200);
+    font-size: var(--size-3);
+    font-weight: 400;
+    min-width: 6ch;
+    max-width: 15ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  p {
+    color: var(--colorNeutral-400);
+    font-size: var(--size-3);
+    font-weight: 400;
+    max-width: 15ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+#bread_crumb_divider {
+  stroke: var(--colorNeutral-300);
+  stroke-width: var(--size-0-5);
+  height: var(--size-3-5);
+}
+
+@media (min-width: 650px) {
+  main {
+    #bread_crumbs {
+      a {
+        max-width: fit-content;
+      }
+      p {
+        max-width: fit-content;
+      }
+    }
+  }
 }

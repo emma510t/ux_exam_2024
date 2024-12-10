@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:8080";
+export const baseUrl = "http://localhost:8080";
 
 // Handles the first .then() in a fetch request, raising an error if the response code is not a 2xx
 const handleAPIError = (response) => {
@@ -42,16 +42,16 @@ export const handleFetchCatchError = (error, method, func_name, errorDestination
 };
 
 // function to fetch from API and calls a function with parameter if needed
-export const fetchAPI = (endpoint, errorDestination, func_name, parameter, options = {}) => {
+export const fetchAPI = (endpoint, errorDestination, func_name, parameters, options = {}) => {
   const method = options.method || "GET";
   fetch(`${baseUrl}${endpoint}`, options)
     .then((response) => handleAPIError(response))
-    .then((response) => func_name(response, parameter))
+    .then((response) => func_name(response, parameters))
     .catch((error) => handleFetchCatchError(error, method, func_name, errorDestination));
 };
 
 // Creates and displays a book card and display it to a .popular_books section
-export const handleBookCard = function (books, page) {
+export const handleBookCard = function (books, parameters) {
   // Creating a container for all the books
   const bookContainer = document.createElement("section");
   bookContainer.className = "book_section";
@@ -73,7 +73,7 @@ export const handleBookCard = function (books, page) {
         const bookCover = bookData.cover !== "" ? bookData.cover : "/assets/images/book_placeholder.jpg";
 
         const subtitle =
-          page === "index" || page === "discover"
+          parameters.page === "index" || parameters.page === "discover"
             ? `<p>${bookData.author}</p>`
             : '<p>About the book <span><svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg"> <path d="M2 2L9 9" stroke-width="4" stroke-linecap="round" /> <path d="M2 16L9 9" stroke-width="4" stroke-linecap="round" /></svg></span></p>';
 
@@ -90,10 +90,14 @@ export const handleBookCard = function (books, page) {
 
         // Create an anchor element around the bookCard
         const bookCard = document.createElement("a");
-        bookCard.href = `/book?id=${bookId}`;
+        if (parameters.author_id !== undefined) {
+          bookCard.href = `book.html?id=${bookId}&author=${parameters.author_id}`;
+        } else {
+          bookCard.href = `book.html?id=${bookId}`;
+        }
 
         // If its the index page, then the fifth book will have special class
-        if (page === "index") {
+        if (parameters.page === "index") {
           index === 4 ? (bookCard.className = "fifth_book") : "";
         }
         bookCard.appendChild(bookArticle);
@@ -146,7 +150,7 @@ export const handleAuthorCard = function (authors, limit) {
     // Create an anchor element around the authorCard, and set href to send the id and author name
     const authorNameURL = author.author_name.replaceAll(" ", "-");
     const authorCard = document.createElement("a");
-    authorCard.href = `/author.html?id=${authorId}&author=${authorNameURL}`;
+    authorCard.href = `author.html?id=${authorId}&author=${authorNameURL}`;
     authorCard.appendChild(authorArticle);
 
     // Appending the authorCard to the container
@@ -172,7 +176,7 @@ function getRandomAuthors(array, count) {
   return result;
 }
 
-function createToast(message, type) {
+export function createToast(message, type) {
   // Get the toast container or create one if it doesn't exist
   let toastContainer = document.querySelector(".toast-container");
 
