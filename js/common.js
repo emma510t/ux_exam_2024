@@ -73,7 +73,7 @@ export const handleBookCard = function (books, parameters) {
         const bookCover = bookData.cover !== "" ? bookData.cover : "/assets/images/book_placeholder.jpg";
 
         const subtitle =
-          parameters.page === "index" || parameters.page === "discover"
+          parameters.page === "index" || parameters.page === "discover" || parameters.page === "searchresults"
             ? `<p>${bookData.author}</p>`
             : '<p>About the book <span><svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg"> <path d="M2 2L9 9" stroke-width="4" stroke-linecap="round" /> <path d="M2 16L9 9" stroke-width="4" stroke-linecap="round" /></svg></span></p>';
 
@@ -105,7 +105,7 @@ export const handleBookCard = function (books, parameters) {
         // Appending the bookCard to the container
         bookContainer.append(bookCard);
       })
-      .catch(handleFetchCatchError);
+      .catch((error) => handleFetchCatchError(error, "GET", "handleBookCard", ".popular_books"));
   });
 
   // Appending the container to the DOM and hiding the loader

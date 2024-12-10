@@ -1,0 +1,31 @@
+main {
+  padding: var(--size-8) var(--size-2-5);
+
+  > div {
+    max-width: var(--size-335);
+
+    h3 {
+      font-size: clamp(var(--size-3-5), -1.3977rem + 4.5455vw, var(--size-6));
+      font-weight: 400;
+      margin-bottom: var(--size-6);
+    }
+
+    #error_message {
+      font-size: clamp(var(--size-3), -1.3977rem + 4.5455vw, var(--size-5));
+      font-weight: 400;
+    }
+  }
+}
+
+/* Desktop */
+@media (min-width: 1400px) {
+  main {
+    padding: var(--size-14) calc((100vw - var(--size-335)) / 2);
+
+    > div {
+      h3 {
+        margin-bottom: var(--size-9);
+      }
+    }
+  }
+}
