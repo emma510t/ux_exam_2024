@@ -4,7 +4,6 @@ const urlParams = new URLSearchParams(window.location.search);
 const search_text = urlParams.get("search").replaceAll("-", " ");
 document.querySelector("#search_result").innerText = search_text;
 
-// endpoint, errorDestination, func_name, parameters, options = {}
 fetchAPI(`/books?s=${search_text}`, "main", (results) => {
   handleBookCard(results, { page: "searchresults" });
 
