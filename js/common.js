@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:8080";
+export const baseUrl = "http://localhost:8080";
 
 // Handles the first .then() in a fetch request, raising an error if the response code is not a 2xx
 const handleAPIError = (response) => {
@@ -37,9 +37,6 @@ export const handleFetchCatchError = (error, method, func_name, errorDestination
       document.querySelector(errorDestination).append(errorSection);
     }
   } else {
-    if (func_name.name === "makeBookLoan") {
-      error = "You already have a loan";
-    }
     createToast(error, "negative");
   }
 };
@@ -180,7 +177,7 @@ function getRandomAuthors(array, count) {
   return result;
 }
 
-function createToast(message, type) {
+export function createToast(message, type) {
   // Get the toast container or create one if it doesn't exist
   let toastContainer = document.querySelector(".toast-container");
 

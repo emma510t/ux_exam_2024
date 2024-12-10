@@ -1,7 +1,8 @@
-import { fetchAPI, loggedInUserID, baseUrl, handleAPIError } from "./common.js";
+import { fetchAPI, loggedInUserID, baseUrl, createToast } from "./common.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 const bookId = urlParams.get("id");
+const user_id = loggedInUserID();
 
 let loan_information = "";
 let loan_history = "";
@@ -91,22 +92,23 @@ function showBook(book) {
   const loan_btn = document.querySelector("#loan_btn");
   if (loan_btn) {
     loan_btn.addEventListener("click", () => {
-      const user_id = loggedInUserID();
-      fetchAPI(
-        `/users/${user_id}/books/${bookId}`,
-        "main",
-        function makeBookLoan(response) {
-          const loan_text = document.createElement("p");
-          loan_text.id = "loan_text";
-          loan_text.innerText = "Book loaned. Check you email for the access link - Enjoy!";
-          document.querySelector("#loan_information").append(loan_text);
-          console.log("book loaned");
-        },
-        null,
-        {
-          method: "POST",
-        }
-      );
+      checkUserLoan();
+      // fetchAPI(
+      //   `/users/${user_id}/books/${bookId}`,
+      //   "main",
+      //   function makeBookLoan(response) {
+      //     const loan_text = document.createElement("p");
+      //     loan_text.id = "loan_text";
+      //     loan_text.innerText = "Book loaned. Check your email for the access link - Enjoy!";
+      //     document.querySelector("#loan_information").append(loan_text);
+      //     document.querySelector("#loan_btn").disabled = true;
+      //     console.log("book loaned");
+      //   },
+      //   null,
+      //   {
+      //     method: "POST",
+      //   }
+      // );
     });
   }
 
@@ -116,5 +118,38 @@ function showBook(book) {
     bread_crumb_container.classList.add("appear");
     book_section.classList.remove("hide");
     bread_crumb_container.classList.remove("hide");
+    checkUserLoan();
   }, 1000); // a timeout for hiding the loader and make the book_section appear
+}
+
+function checkUserLoan() {
+  fetch(`${baseUrl}/uses/${user_id}/books/${bookId}`, {
+    method: "POST",
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      // If the response is not OK, try to extract the error message from the response body
+      return response.json().then((errorDetails) => {
+        throw new Error(errorDetails.error || "HTTP response error"); // Fallback to a generic error message if no specific message exists
+      });
+    })
+    .then((response) => {
+      console.log("hej", response);
+    })
+    .catch((error) => {
+      if (error == "Error: This user has still this book on loan") {
+        const loan_text = document.createElement("p");
+        loan_text.id = "loan_text";
+        loan_text.innerText = "Book loaned. Check your email for the access link - Enjoy!";
+        // loan_text.innerText = "You have a loan on this book";
+        document.querySelector("#loan_information").append(loan_text);
+        document.querySelector("#loan_btn").disabled = true;
+        console.log("book loaned / already loaned");
+      } else {
+        console.log("Failed to fetch loan information", error);
+        createToast("Failed to fetch loan information. Please come back later", "negative");
+      }
+    });
 }

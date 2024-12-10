@@ -23,11 +23,11 @@ main {
       background-color: var(--colorPrimary-100);
       color: var(--colorNeutral-400);
     }
-    /* button:disabled {
+    button:disabled {
       cursor: default;
       background-color: var(--colorNeutral-300);
       color: var(--colorNeutral-100);
-    } */
+    }
 
     #loan_text {
       margin-top: var(--size-2-5);
