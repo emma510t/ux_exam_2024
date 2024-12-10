@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/author.css" />
-    <script src="js/author.js" type="module"></script>
+    <link rel="stylesheet" href="css/book.css" />
+    <script src="js/book.js" type="module"></script>
     <script src="js/navigation.js" type="module"></script>
-    <title>BOOKS4U | Author</title>
+    <title>BOOKS4U</title>
   </head>
   <body>
     <header>
@@ -56,26 +56,17 @@
       </nav>
     </header>
     <main>
-      <section id="bread_crumbs">
-        <a href="authors.html">Authors</a>
-        <svg id="bread_crumb_divider" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 2L9 9" stroke-linecap="round" />
-          <path d="M2 16L9 9" stroke-linecap="round" />
+      <section class="loading_section">
+        <svg id="loader" version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+          <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
         </svg>
-        <p id="bread_current">Author</p>
       </section>
-      <section>
-        <h2 id="author_title">Author</h2>
-        <section class="books_section">
-          <section class="loading_section">
-            <svg id="loader" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100">
-              <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
-            </svg>
-          </section>
-          <div class="popular_books hide"></div>
-        </section>
-      </section>
+      <section id="bread_crumb_container" class="hide"></section>
+      <section id="book_singleview" class="hide"></section>
     </main>
     <footer><p>&copy; UX exam 2024</p></footer>
+    <div class="toast-container" aria-live="polite" role="region" aria-labelledby="toast-container-title">
+      <h2 id="toast-container-title" class="sr-only">Toast Notifications</h2>
+    </div>
   </body>
 </html>

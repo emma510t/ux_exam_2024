@@ -158,35 +158,6 @@ input:focus:invalid {
   display: none;
 }
 
-#bread_crumbs {
-  a {
-    text-decoration: none;
-  }
-}
-
-#bread_crumbs {
-  display: flex;
-  gap: var(--size-2);
-  align-items: center;
-  margin-bottom: var(--size-2-5);
-  margin-top: var(--size-4);
-
-  a {
-    color: var(--colorPrimary-200);
-    font-size: var(--size-3);
-    font-weight: 400;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  p {
-    color: var(--colorNeutral-400);
-    font-size: var(--size-3);
-    font-weight: 400;
-  }
-}
-
 input:invalid.invalid,
 input.invalid {
   border: var(--size-0-5) solid var(--colorWarning-100);
