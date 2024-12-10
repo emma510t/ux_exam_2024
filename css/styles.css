@@ -115,12 +115,17 @@ h2 {
   align-items: center;
   margin-bottom: var(--size-2-5);
   max-width: var(--size-335);
+  margin-top: var(--size-4);
 
   a {
-    color: var(--colorNeutral-400);
+    color: var(--colorPrimary-200);
     font-size: var(--size-3);
     font-weight: 400;
-    text-decoration: underline;
+    min-width: 6ch;
+    max-width: 15ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   a:hover {
     text-decoration: underline;
@@ -129,6 +134,10 @@ h2 {
     color: var(--colorNeutral-400);
     font-size: var(--size-3);
     font-weight: 400;
+    max-width: 15ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 #bread_crumb_divider {
@@ -141,7 +150,10 @@ h2 {
   main {
     #bread_crumbs {
       a {
-        text-decoration: none;
+        max-width: fit-content;
+      }
+      p {
+        max-width: fit-content;
       }
     }
   }
