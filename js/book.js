@@ -89,26 +89,11 @@ function showBook(book) {
   const book_section = document.querySelector("#book_singleview");
   book_section.append(book_content);
 
+  // Eventlistener for the loan button (if present)
   const loan_btn = document.querySelector("#loan_btn");
   if (loan_btn) {
     loan_btn.addEventListener("click", () => {
       checkUserLoan();
-      // fetchAPI(
-      //   `/users/${user_id}/books/${bookId}`,
-      //   "main",
-      //   function makeBookLoan(response) {
-      //     const loan_text = document.createElement("p");
-      //     loan_text.id = "loan_text";
-      //     loan_text.innerText = "Book loaned. Check your email for the access link - Enjoy!";
-      //     document.querySelector("#loan_information").append(loan_text);
-      //     document.querySelector("#loan_btn").disabled = true;
-      //     console.log("book loaned");
-      //   },
-      //   null,
-      //   {
-      //     method: "POST",
-      //   }
-      // );
     });
   }
 
@@ -118,15 +103,15 @@ function showBook(book) {
     bread_crumb_container.classList.add("appear");
     book_section.classList.remove("hide");
     bread_crumb_container.classList.remove("hide");
-    checkUserLoan();
   }, 1000); // a timeout for hiding the loader and make the book_section appear
 }
 
 function checkUserLoan() {
-  fetch(`${baseUrl}/uses/${user_id}/books/${bookId}`, {
+  fetch(`${baseUrl}/users/${user_id}/books/${bookId}`, {
     method: "POST",
   })
     .then((response) => {
+      // If loan is succesful
       if (response.ok) {
         return response.json();
       }
@@ -136,17 +121,22 @@ function checkUserLoan() {
       });
     })
     .then((response) => {
-      console.log("hej", response);
+      const loan_text = document.createElement("p");
+      loan_text.id = "loan_text";
+      loan_text.innerText = "Book loaned. Check your email for the access link - Enjoy!";
+      document.querySelector("#loan_information").append(loan_text);
+      document.querySelector("#loan_btn").disabled = true;
+      console.log("book loaned", response);
     })
     .catch((error) => {
+      // If user already have a loan
       if (error == "Error: This user has still this book on loan") {
         const loan_text = document.createElement("p");
         loan_text.id = "loan_text";
-        loan_text.innerText = "Book loaned. Check your email for the access link - Enjoy!";
-        // loan_text.innerText = "You have a loan on this book";
+        loan_text.innerText = "You already have a loan on this book. Check your email for the access link - Enjoy!";
         document.querySelector("#loan_information").append(loan_text);
         document.querySelector("#loan_btn").disabled = true;
-        console.log("book loaned / already loaned");
+        console.log("book loaned");
       } else {
         console.log("Failed to fetch loan information", error);
         createToast("Failed to fetch loan information. Please come back later", "negative");
