@@ -21,9 +21,9 @@ function showBook(book) {
     loan_information = '<section id="loan_information"><button id="loan_btn">Loan the book</button></section>';
   }
 
+  // If admin is logged in and loans key is present
   if (book["loans"]) {
     loan_history = '<section id="loan_info_container"><h3>Loan history</h3>';
-    console.log(book["loans"]);
 
     book["loans"].forEach((loan) => {
       const loan_section = `<article class="loan_info"><h4>Loan date</h4><p class="info_text">${loan.loan_date}</p><h4>User id</h4><p class="info_text">${loan.user_id}</p></article>`;
@@ -32,7 +32,7 @@ function showBook(book) {
     loan_history = loan_history + "</section>";
   }
 
-  // create breadcrumbs depending on which page was the previus
+  // create breadcrumbs depending on which page was the previous
   const bread_crumb = document.createElement("div");
   bread_crumb.id = "bread_crumbs";
   if (urlParams.get("author")) {
@@ -43,7 +43,7 @@ function showBook(book) {
             <path d="M2 2L9 9" stroke-linecap="round" />
             <path d="M2 16L9 9" stroke-linecap="round" />
           </svg>
-          <a id="bread_current_author" href="/author.html?id=${authorId}&author=${book.author}" >${book.author}</a>
+          <a id="bread_current_author" href="author.html?id=${authorId}&author=${book.author}" >${book.author}</a>
           <svg id="bread_crumb_divider" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M2 2L9 9" stroke-linecap="round" />
             <path d="M2 16L9 9" stroke-linecap="round" />

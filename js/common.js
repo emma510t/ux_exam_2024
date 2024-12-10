@@ -90,7 +90,6 @@ export const handleBookCard = function (books, parameters) {
 
         // Create an anchor element around the bookCard
         const bookCard = document.createElement("a");
-        // bookCard.href = `/book.html?id=${bookId}`;
         if (parameters.author_id !== undefined) {
           bookCard.href = `book.html?id=${bookId}&author=${parameters.author_id}`;
         } else {
