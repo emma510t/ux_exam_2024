@@ -229,3 +229,40 @@ export const logout = () => {
   sessionStorage.removeItem("b4u_user_id");
   window.location.replace("http://127.0.0.1:5500/login.html");
 };
+
+export function isYoungerThan13(birthDate) {
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+
+  // Check if the birth month and day are ahead of today's month and day
+  if (today.getMonth() < birthDate.getMonth() || (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  return age < 13;
+}
+
+// Custom format: YYYY-MM-DD
+export const formattedDate = () => {
+  const today = new Date();
+  const thirteenYearsAgo = new Date();
+  thirteenYearsAgo.setFullYear(today.getFullYear() - 13);
+  return thirteenYearsAgo.toISOString().split("T")[0];
+};
+
+export function handleValidationError(input, message) {
+  const errorMessage = input.nextElementSibling;
+  if (errorMessage) {
+    if (message) {
+      errorMessage.textContent = message;
+      errorMessage.classList.remove("hidden");
+      input.classList.add("invalid");
+    } else {
+      errorMessage.textContent = "";
+      errorMessage.classList.add("hidden");
+      input.classList.remove("invalid");
+    }
+  } else {
+    console.warn("Error message element not found for:", input);
+  }
+}
