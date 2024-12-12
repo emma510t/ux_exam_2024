@@ -96,6 +96,9 @@ header {
       background: none;
       border: none;
     }
+    a:hover {
+      text-decoration: underline;
+    }
   }
   .search_container {
     background-color: var(--colorSecondary-100);
@@ -245,11 +248,22 @@ header {
           background-color: var(--colorNeutral-100);
           color: var(--colorPrimary-200);
         }
+        #logout-btn:hover,
+        #login-link:hover {
+          background-color: var(--colorNeutral-200);
+          text-decoration: none;
+        }
         #signup-link,
         #admin-link,
         #profile-link {
           background-color: var(--colorPrimary-200);
           color: var(--colorNeutral-100);
+        }
+        #signup-link:hover,
+        #admin-link:hover,
+        #profile-link:hover {
+          background-color: var(--colorSecondary-200);
+          text-decoration: none;
         }
       }
     }

@@ -18,6 +18,10 @@ body {
   background-color: var(--colorNeutral-100);
 }
 
+button {
+  cursor: pointer;
+}
+
 a {
   text-decoration: none;
 }
