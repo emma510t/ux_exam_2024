@@ -58,7 +58,7 @@ export const handleBookCard = function (books, parameters) {
   const bookContainer = document.createElement("section");
   bookContainer.className = "book_section";
 
-  if (books.length < 1) {
+  if (parameters.page === "author" && books.length < 1) {
     const no_books_message = document.createElement("p");
     no_books_message.innerText = "Author has no books yet.";
     document.querySelector(".book_selection").append(no_books_message);

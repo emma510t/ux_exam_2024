@@ -57,7 +57,7 @@ h2 {
   bottom: var(--size-24); /* Move the container to the top */
   left: 50%; /* Align it to the right */
   transform: translateX(-50%);
-  max-width: 300px;
+  max-width: var(--size-75);
   z-index: 9999; /* Ensure it appears above other elements */
 }
 

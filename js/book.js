@@ -28,11 +28,15 @@ function showBook(book) {
   // If admin is logged in and loans key is present
   if (book["loans"]) {
     loan_history = '<section id="loan_info_container"><h3>Loan history</h3>';
-
-    book["loans"].forEach((loan) => {
-      const loan_section = `<article class="loan_info"><h4>Loan date</h4><p class="info_text">${loan.loan_date}</p><h4>User id</h4><p class="info_text">${loan.user_id}</p></article>`;
-      loan_history = loan_history + loan_section;
-    });
+    if (book["loans"].length < 1) {
+      loan_history = loan_history + "<p>No loan history yet.</p>";
+    } else {
+      const bookArray = book["loans"].reverse();
+      bookArray.forEach((loan) => {
+        const loan_section = `<article class="loan_info"><h4>Loan date</h4><p class="info_text">${loan.loan_date}</p><h4>User id</h4><p class="info_text">${loan.user_id}</p></article>`;
+        loan_history = loan_history + loan_section;
+      });
+    }
     loan_history = loan_history + "</section>";
   }
 

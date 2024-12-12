@@ -255,7 +255,6 @@ header {
     }
     .prim-nav-d,
     .utility-nav {
-      /*  height: calc((100vh - 44.5px) / 2); */
       padding: 0;
       li {
         padding-bottom: 0;

@@ -114,7 +114,6 @@ if (loggedInUserID()) {
 document.querySelector("#formDeleteProfile").addEventListener("submit", async (e) => {
   e.preventDefault();
   if (e.target.delete_confirmation.checked) {
-    logout();
     deleteUser();
   } else {
     handleValidationError(e.target.delete_confirmation, "You must checck the checkbox to delete your account");
@@ -147,6 +146,7 @@ function deleteUser() {
     (response) => {
       console.log("Deleted:", response);
       window.location.replace("http://127.0.0.1:5500/login.html");
+      sessionStorage.removeItem("b4u_user_id");
     },
     null,
     {

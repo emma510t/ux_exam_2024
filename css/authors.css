@@ -3,6 +3,9 @@ body {
   flex-direction: column;
   height: 100vh;
 }
+.uppercase {
+  text-transform: uppercase;
+}
 main {
   #authors_image {
     display: none;

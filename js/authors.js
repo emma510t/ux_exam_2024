@@ -53,7 +53,7 @@ function filterAuthors(authors, letter) {
     return 0; // they are equal
   });
   if (filteredArray.length < 1) {
-    document.querySelector(".authors_selection").innerHTML = `<p>No authors starting with "${letter}", sadly</p>`;
+    document.querySelector(".authors_selection").innerHTML = `<p>No authors starting with <span class="uppercase">"${letter}"</span></p>`;
   } else {
     handleAuthorCard(filteredArray);
   }
