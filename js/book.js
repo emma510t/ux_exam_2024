@@ -10,7 +10,6 @@ let loan_instructions = "";
 
 // fetch book info according to who the user is
 if (loggedInUserID() === "2679") {
-  console.log("logged in");
   fetchAPI(`/admin/books/${bookId}`, "main", showBook);
 } else {
   fetchAPI(`/books/${bookId}`, "main", showBook);
