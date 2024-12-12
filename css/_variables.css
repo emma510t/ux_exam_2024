@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap");
 
 /* global variables */
 
@@ -15,7 +15,6 @@
 
   --colorNeutral-400: #333333;
   --colorNeutral-300: #555555;
-  --colorNeutral-200: #eeeeee;
   --colorNeutral-100: #fbfbfb;
 
   --colorWarning-100: #ff3300;
@@ -43,26 +42,16 @@
   --size-12: 3rem; /* 48px */
   --size-13: 3.25rem; /* 52px */
   --size-14: 3.5rem; /* 56px */
-  --size-16: 4rem; /* 64px */
   --size-20: 5rem; /* 80px */
   --size-24: 6rem; /* 96px */
   --size-28: 7rem; /* 112px */
   --size-32: 8rem; /* 128px */
-  --size-36: 9rem; /* 144px */
   --size-40: 10rem; /* 160px */
-  --size-44: 11rem; /* 176px */
   --size-48: 12rem; /* 192px */
-  --size-52: 13rem; /* 208px */
-  --size-56: 14rem; /* 224px */
   --size-60: 15rem; /* 240px */
-  --size-64: 16rem; /* 256px */
   --size-72: 18rem; /* 288px */
   --size-75: 18.75rem; /* 300px */
   --size-80: 20rem; /* 320px */
-  --size-87: 21.75rem; /* 348px */
   --size-96: 24rem; /* 384px */
   --size-335: 83.875rem; /* 1342px */
-
-  /* SIZES  %*/
-  --p-35: 35%;
 }

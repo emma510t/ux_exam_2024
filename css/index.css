@@ -25,7 +25,7 @@ h4 {
   }
 
   #subtitle {
-    margin-bottom: var(--p-35);
+    margin-bottom: 35%;
 
     h3 {
       font-size: var(--size-6);
