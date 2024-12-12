@@ -9,7 +9,8 @@ let loan_history = "";
 let loan_instructions = "";
 
 // fetch book info according to who the user is
-if (loggedInUserID() == 2679) {
+if (loggedInUserID() === "2679") {
+  console.log("logged in");
   fetchAPI(`/admin/books/${bookId}`, "main", showBook);
 } else {
   fetchAPI(`/books/${bookId}`, "main", showBook);
@@ -18,7 +19,7 @@ if (loggedInUserID() == 2679) {
 function showBook(book) {
   document.title = `BOOKS4U | ${book.title}`;
 
-  if (loggedInUserID() && loggedInUserID() != 2679) {
+  if (loggedInUserID() && loggedInUserID() !== "2679") {
     loan_information = '<section id="loan_information"><button id="loan_btn">Loan the book</button></section>';
   }
   if (!loggedInUserID()) {
@@ -135,6 +136,7 @@ function checkUserLoan() {
       console.log("book loaned", response);
     })
     .catch((error) => {
+      console.log(error);
       // If user already have a loan
       if (error == "Error: This user has still this book on loan") {
         const loan_text = document.createElement("p");

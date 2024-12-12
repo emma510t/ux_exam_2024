@@ -24,7 +24,7 @@ if (loggedInUserID()) {
   document.querySelector("li:has(#login-link)").classList.add("hidden");
   document.querySelector("li:has(#signup-link)").classList.add("hidden");
   document.querySelector("li:has(#logout-btn)").classList.remove("hidden");
-  if (loggedInUserID() == 2679) {
+  if (loggedInUserID() === "2679") {
     document.querySelector("li:has(#admin-link)").classList.remove("hidden");
     document.querySelector("li:has(#profile-link)").classList.add("hidden");
   } else {
