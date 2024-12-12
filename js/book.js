@@ -6,6 +6,7 @@ const user_id = loggedInUserID();
 
 let loan_information = "";
 let loan_history = "";
+let loan_instructions = "";
 
 // fetch book info according to who the user is
 if (loggedInUserID() == 2679) {
@@ -19,6 +20,9 @@ function showBook(book) {
 
   if (loggedInUserID() && loggedInUserID() != 2679) {
     loan_information = '<section id="loan_information"><button id="loan_btn">Loan the book</button></section>';
+  }
+  if (!loggedInUserID()) {
+    loan_instructions = '<p id="loan_instructions"><a href="login.html">Login</a> or <a href="signup.html">Sign up</a> to loan the book</p>';
   }
 
   // If admin is logged in and loans key is present
@@ -70,6 +74,7 @@ function showBook(book) {
         <div>
           <h2>${book.title}</h2>
           <p id="author_name">${book.author}</p>
+          ${loan_instructions}
           ${loan_information}
           <section id="publisher_info" class="info_box">
             <div>

@@ -10,6 +10,17 @@ main {
       margin-bottom: var(--size-2-5);
     }
 
+    #loan_instructions {
+      margin-top: var(--size-4);
+
+      a {
+        color: var(--colorPrimary-200);
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+
     button {
       background-color: var(--colorPrimary-200);
       color: var(--colorNeutral-100);
