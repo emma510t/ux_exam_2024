@@ -35,6 +35,7 @@ function showBook(book) {
   // create breadcrumbs depending on which page was the previous
   const bread_crumb = document.createElement("div");
   bread_crumb.id = "bread_crumbs";
+  authorNameURL = book.author.replaceAll(" ", "-");
   if (urlParams.get("author")) {
     const authorId = urlParams.get("author");
     bread_crumb.innerHTML = `
@@ -43,7 +44,7 @@ function showBook(book) {
             <path d="M2 2L9 9" stroke-linecap="round" />
             <path d="M2 16L9 9" stroke-linecap="round" />
           </svg>
-          <a id="bread_current_author" href="author.html?id=${authorId}&author=${book.author}" >${book.author}</a>
+          <a id="bread_current_author" href="author.html?id=${authorId}&author=${authorNameURL}" >${book.author}</a>
           <svg id="bread_crumb_divider" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M2 2L9 9" stroke-linecap="round" />
             <path d="M2 16L9 9" stroke-linecap="round" />
