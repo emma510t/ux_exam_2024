@@ -35,7 +35,7 @@ function showBook(book) {
   // create breadcrumbs depending on which page was the previous
   const bread_crumb = document.createElement("div");
   bread_crumb.id = "bread_crumbs";
-  authorNameURL = book.author.replaceAll(" ", "-");
+  const authorNameURL = book.author.replaceAll(" ", "-");
   if (urlParams.get("author")) {
     const authorId = urlParams.get("author");
     bread_crumb.innerHTML = `

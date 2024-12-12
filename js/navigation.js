@@ -17,7 +17,7 @@ document.querySelector(".search-box_reset").addEventListener("click", () => {
 document.querySelector(".search-box").addEventListener("submit", (e) => {
   e.preventDefault();
   const search_text = e.target.search.value.trim().replaceAll(" ", "-");
-  window.location.replace(`http://127.0.0.1:5500/searchresult.html?search=${search_text}`);
+  window.location.href = `http://127.0.0.1:5500/searchresult.html?search=${search_text}`;
 });
 
 if (loggedInUserID()) {
