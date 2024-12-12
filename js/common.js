@@ -16,10 +16,8 @@ export const handleFetchCatchError = (error, method, func_name, errorDestination
   if (method === "GET") {
     console.log(error);
     const errorSection = document.createElement("section");
-    errorSection.innerHTML = `
-    <h4>    
-    <h3>Data Error</h3>
-    </h4>
+    errorSection.innerHTML = `    
+    <p class="handleFetchCatchError">Data Error</p>
     <p>An error occurred while retrieving the data. Please come back later.</p>
     `;
     // if page has loader, then hide it
@@ -27,12 +25,16 @@ export const handleFetchCatchError = (error, method, func_name, errorDestination
       document.querySelector(".loading_section").classList.add("hide");
     }
 
-    if (func_name.name === "handleBookCard") {
+    if (func_name.name === "handleBookCard" || func_name.name === "handleAuthorCard" || func_name.name === "showAuthors") {
       document.querySelector(errorDestination).classList.remove("hide");
       document.querySelector(errorDestination).append(errorSection);
-    } else if (func_name.name === "handleAuthorCard" || func_name.name === "showAuthors") {
-      document.querySelector(errorDestination).classList.remove("hide");
-      document.querySelector(errorDestination).append(errorSection);
+    } else if (errorDestination === "#publisherSelectContainer" || errorDestination === "#authorSelectContainer") {
+      const errorSelectMessage = document.createElement("p");
+      errorSelectMessage.classList.add("error-message");
+      errorSelectMessage.innerText = `
+    404: An error occurred while retrieving the data. Please come back later.
+    `;
+      document.querySelector(errorDestination).append(errorSelectMessage);
     } else {
       document.querySelector(errorDestination).append(errorSection);
     }
