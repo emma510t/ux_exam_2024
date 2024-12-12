@@ -29,18 +29,15 @@ document.querySelector("#addNewBookForm").addEventListener("submit", async (e) =
       publisher_id: e.target.bookPublishingCompany.value.trim(),
       publishing_year: publishingYearInput.value.trim(),
     };
-    try {
-      submitFormData(newBookData, "books", "book");
-    } catch (error) {
-      console.warn(error);
-    } finally {
-      document.querySelectorAll("#addNewBookForm input").forEach((input) => {
-        input.value = ""; // Clear the input value
-      });
-      document.querySelectorAll("#addNewBookForm select").forEach((select) => {
-        select.selectedIndex = 0;
-      });
-    }
+    submitFormData(newBookData, "books", "book");
+
+    document.querySelectorAll("#addNewBookForm input").forEach((input) => {
+      input.value = ""; // Clear the input value
+    });
+
+    document.querySelectorAll("#addNewBookForm select").forEach((select) => {
+      select.selectedIndex = 0;
+    });
   }
 });
 
@@ -53,18 +50,16 @@ document.querySelector("#addNewAuthorForm").addEventListener("submit", async (e)
       first_name: e.target.authorFirstname.value.trim(),
       last_name: e.target.authorLastname.value.trim(),
     };
-    try {
-      await submitFormData(newAuthorData, "authors", "author");
-    } catch (error) {
-      console.warn(error);
-    } finally {
-      document.querySelectorAll("#addNewAuthorForm input").forEach((input) => {
-        input.value = ""; // Clear the input value
-        fetchAuthors();
-      });
-    }
+
+    await submitFormData(newAuthorData, "authors", "author");
+
+    document.querySelectorAll("#addNewAuthorForm input").forEach((input) => {
+      input.value = ""; // Clear the input value
+      fetchAuthors();
+    });
   }
 });
+
 document.querySelector("#addNewPublisherForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   let isValid = true;
@@ -73,14 +68,10 @@ document.querySelector("#addNewPublisherForm").addEventListener("submit", async 
     const newPublishersData = {
       name: e.target.publisherName.value.trim(),
     };
-    try {
-      await submitFormData(newPublishersData, "publishers", "publisher");
-    } catch (error) {
-      console.warn(error);
-    } finally {
-      document.querySelector("#addNewPublisherForm input").value = "";
-      fetchPublishers();
-    }
+
+    await submitFormData(newPublishersData, "publishers", "publisher");
+    document.querySelector("#addNewPublisherForm input").value = "";
+    fetchPublishers();
   }
 });
 
@@ -103,7 +94,7 @@ document.querySelectorAll("main input").forEach((input) => {
 function submitFormData(formData, url, type) {
   const adminFormData = new URLSearchParams(formData);
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     fetchAPI(
       `/admin/${url}`,
       null, // null because not-get goes to toast
@@ -112,10 +103,7 @@ function submitFormData(formData, url, type) {
         createToast(`The ${type} was added successfully`, "positive");
         resolve(response); // Resolve the promise when successful
       },
-      (error) => {
-        console.error(`Failed to upload ${type}:`, error);
-        reject(error); // Reject the promise on failure
-      },
+      null,
       {
         method: "POST",
         body: adminFormData,
@@ -125,13 +113,16 @@ function submitFormData(formData, url, type) {
 }
 
 function fetchAuthors() {
-  fetchAPI("/authors", "main", (response) => {
+  fetchAPI("/authors", "#authorSelectContainer", (response) => {
     const authorsArray = response.sort((a, b) => {
       return a.author_name.localeCompare(b.author_name);
     });
 
-    const authorSelect = document.querySelector("select#bookAuthor");
-    // Clear existing options
+    const authorSelect = document.createElement("select");
+    authorSelect.id = "bookAuthor";
+    authorSelect.name = "bookAuthor";
+    authorSelect.required = true;
+
     authorSelect.innerHTML = '<option value="" disabled selected>Select an author</option>';
 
     // Add new options
@@ -142,20 +133,27 @@ function fetchAuthors() {
 
       authorSelect.appendChild(authorOption);
     });
+
+    authorSelectContainer = document.querySelector("#authorSelectContainer");
+    authorSelectContainer.innerHTML = "";
+    authorSelectContainer.append(authorSelect);
   });
 }
 
 function fetchPublishers() {
-  fetchAPI("/publishers", "main", (response) => {
+  fetchAPI("/publishers", "#publisherSelectContainer", (response) => {
     const publishersArray = response.sort((a, b) => {
       return a.publisher_name.localeCompare(b.publisher_name);
     });
 
-    const publisherSelect = document.querySelector("select#bookPublishingCompany");
-    // Clear existing options
+    const publisherSelect = document.createElement("select");
+    publisherSelect.id = "bookPublishingCompany";
+    publisherSelect.name = "bookPublishingCompany";
+    publisherSelect.required = true;
+
     publisherSelect.innerHTML = '<option value="" disabled selected>Select a publishing company</option>';
 
-    // Add new options
+    // A new options
     publishersArray.forEach((publisher) => {
       const publisherOption = document.createElement("option");
       publisherOption.value = publisher.publisher_id;
@@ -163,5 +161,8 @@ function fetchPublishers() {
 
       publisherSelect.appendChild(publisherOption);
     });
+    publisherSelectContainer = document.querySelector("#publisherSelectContainer");
+    publisherSelectContainer.innerHTML = "";
+    publisherSelectContainer.append(publisherSelect);
   });
 }

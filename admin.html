@@ -69,16 +69,20 @@
                 </div>
                 <div>
                     <label for="bookAuthor">Author</label>
-                    <select id="bookAuthor" name="bookAuthor" required>
-                        <option value="" disabled selected>Select an author</option>
-                    </select>
+                    <div id="authorSelectContainer">
+                        <select id="bookAuthor" name="bookAuthor" required>
+                            <option value="" disabled selected>Loading authors...</option>
+                        </select>
+                    </div>
                     <span class="error-message hidden"></span>
                 </div>
                 <div>
                     <label for="bookPublishingCompany">Publishing Company</label>
-                    <select id="bookPublishingCompany" name="bookPublishingCompany" required>
-                        <option value="" disabled selected>Select a publishing company</option>
-                    </select>
+                    <div id="publisherSelectContainer">
+                        <select id="bookPublishingCompany" name="bookPublishingCompany" required>
+                            <option value="" disabled selected>Loading publishers...</option>
+                        </select>
+                    </div>
                     <span class="error-message hidden"></span>
                 </div>
                 <div>

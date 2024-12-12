@@ -146,6 +146,31 @@ h2 {
   height: var(--size-3-5);
 }
 
+.handleFetchCatchError {
+  font-weight: 500;
+  font-size: var(--size-6);
+}
+
+input:invalid.invalid,
+input.invalid {
+  border: var(--size-0-5) solid var(--colorWarning-100);
+}
+
+input:focus:invalid {
+  border: var(--size-0-5) solid var(--colorWarning-100);
+}
+
+.error-message {
+  color: var(--colorWarning-100);
+  font-size: var(--size-3-5);
+  margin-top: var(--size-1);
+  display: block;
+}
+
+.error-message.hidden {
+  display: none;
+}
+
 @media (min-width: 650px) {
   main {
     #bread_crumbs {

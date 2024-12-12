@@ -1,10 +1,10 @@
 main {
   padding: var(--size-6) var(--size-2-5) var(--size-7);
   h3 {
-    font-size: clamp(1.25rem, 0.9955rem + 1.1976vw, 2rem);
+    font-size: clamp(var(--size-1), 0.9955rem + 1.1976vw, var(--size-8));
     color: var(--colorNeutral-400);
     font-weight: 700;
-    padding-bottom: clamp(0.875rem, 0.0379rem + 3.9394vw, 2.5rem);
+    padding-bottom: clamp(var(--size-3-5), 0.0379rem + 3.9394vw, var(--size-10));
   }
   form {
     display: flex;
@@ -103,24 +103,4 @@ main {
     max-width: var(--size-335);
     margin: auto;
   }
-}
-
-input:invalid.invalid,
-input.invalid {
-  border: var(--size-0-5) solid var(--colorWarning-100);
-}
-
-input:focus:invalid {
-  border: var(--size-0-5) solid var(--colorWarning-100);
-}
-
-.error-message {
-  color: var(--colorWarning-100);
-  font-size: var(--size-3-5);
-  margin-top: var(--size-1);
-  display: block;
-}
-
-.error-message.hidden {
-  display: none;
 }
