@@ -1,4 +1,4 @@
-.popular_books {
+.book_selection {
   .book_section {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -69,7 +69,7 @@
 }
 /* Tablet */
 @media (min-width: 650px) {
-  .popular_books {
+  .book_selection {
     .book_section {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -80,7 +80,7 @@
 }
 
 @media (min-width: 800px) {
-  .popular_books {
+  .book_selection {
     .book_section {
       grid-template-columns: repeat(5, 1fr);
     }

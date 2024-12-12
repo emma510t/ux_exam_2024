@@ -52,35 +52,40 @@ export const fetchAPI = (endpoint, errorDestination, func_name, parameters, opti
     .catch((error) => handleFetchCatchError(error, method, func_name, errorDestination));
 };
 
-// Creates and displays a book card and display it to a .popular_books section
+// Creates and displays a book card and display it to a .book_selection section
 export const handleBookCard = function (books, parameters) {
   // Creating a container for all the books
   const bookContainer = document.createElement("section");
   bookContainer.className = "book_section";
 
-  // looping over all the books
-  books.forEach((book, index) => {
-    // Getting the book id
-    const bookId = book["book_id"];
+  if (books.length < 1) {
+    const no_books_message = document.createElement("p");
+    no_books_message.innerText = "Author has no books yet.";
+    document.querySelector(".book_selection").append(no_books_message);
+  } else {
+    // looping over all the books
+    books.forEach((book, index) => {
+      // Getting the book id
+      const bookId = book["book_id"];
 
-    // Fetching all the needed data for the book (also the cover)
-    fetch(`${baseUrl}/books/${bookId}`)
-      .then((response) => handleAPIError(response))
-      .then((bookData) => {
-        // Create an article for the book
-        const bookArticle = document.createElement("article");
-        bookArticle.className = "book_card";
+      // Fetching all the needed data for the book (also the cover)
+      fetch(`${baseUrl}/books/${bookId}`)
+        .then((response) => handleAPIError(response))
+        .then((bookData) => {
+          // Create an article for the book
+          const bookArticle = document.createElement("article");
+          bookArticle.className = "book_card";
 
-        // Handling image if extern API fails
-        const bookCover = bookData.cover !== "" ? bookData.cover : "/assets/images/book_placeholder.jpg";
+          // Handling image if extern API fails
+          const bookCover = bookData.cover !== "" ? bookData.cover : "/assets/images/book_placeholder.jpg";
 
-        const subtitle =
-          parameters.page === "index" || parameters.page === "discover"
-            ? `<p>${bookData.author}</p>`
-            : '<p>About the book <span><svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg"> <path d="M2 2L9 9" stroke-width="4" stroke-linecap="round" /> <path d="M2 16L9 9" stroke-width="4" stroke-linecap="round" /></svg></span></p>';
+          const subtitle =
+            parameters.page === "index" || parameters.page === "discover" || parameters.page === "searchresults"
+              ? `<p>${bookData.author}</p>`
+              : '<p>About the book <span><svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg"> <path d="M2 2L9 9" stroke-width="4" stroke-linecap="round" /> <path d="M2 16L9 9" stroke-width="4" stroke-linecap="round" /></svg></span></p>';
 
-        // Building the bookArticle
-        bookArticle.innerHTML = `
+          // Building the bookArticle
+          bookArticle.innerHTML = `
               <div class="book_image_container">
                 <img src="${bookCover}" alt="" class="book_card_img">
               </div>
@@ -90,36 +95,37 @@ export const handleBookCard = function (books, parameters) {
               </div>
               `;
 
-        // Create an anchor element around the bookCard
-        const bookCard = document.createElement("a");
-        if (parameters.author_id !== undefined) {
-          bookCard.href = `book.html?id=${bookId}&author=${parameters.author_id}`;
-        } else {
-          bookCard.href = `book.html?id=${bookId}`;
-        }
+          // Create an anchor element around the bookCard
+          const bookCard = document.createElement("a");
+          if (parameters.author_id !== undefined) {
+            bookCard.href = `book.html?id=${bookId}&author=${parameters.author_id}`;
+          } else {
+            bookCard.href = `book.html?id=${bookId}`;
+          }
 
-        // If its the index page, then the fifth book will have special class
-        if (parameters.page === "index") {
-          index === 4 ? (bookCard.className = "fifth_book") : "";
-        }
-        bookCard.appendChild(bookArticle);
+          // If its the index page, then the fifth book will have special class
+          if (parameters.page === "index") {
+            index === 4 ? (bookCard.className = "fifth_book") : "";
+          }
+          bookCard.appendChild(bookArticle);
 
-        // Appending the bookCard to the container
-        bookContainer.append(bookCard);
-      })
-      .catch(handleFetchCatchError);
-  });
+          // Appending the bookCard to the container
+          bookContainer.append(bookCard);
+        })
+        .catch((error) => handleFetchCatchError(error, "GET", "handleBookCard", ".book_selection"));
+    });
+  }
 
   // Appending the container to the DOM and hiding the loader
-  const popular_books = document.querySelector(".popular_books");
-  popular_books.append(bookContainer);
+  const book_selection = document.querySelector(".book_selection");
+  book_selection.append(bookContainer);
 
   setTimeout(() => {
-    popular_books.classList.add("appear");
-    popular_books.classList.remove("hide");
+    book_selection.classList.add("appear");
+    book_selection.classList.remove("hide");
     document.querySelector(".discover_more") ? document.querySelector(".discover_more").classList.remove("hide") : "";
     document.querySelector(".loading_section").classList.add("hide");
-  }, 1000); // a timeout for hiding the loader and make the popular_books section appear
+  }, 1000); // a timeout for hiding the loader and make the book_selection section appear
 };
 
 // Creates and displays a author card and display it to a .authors_selection section

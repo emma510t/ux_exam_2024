@@ -6,9 +6,10 @@ const user_id = loggedInUserID();
 
 let loan_information = "";
 let loan_history = "";
+let loan_instructions = "";
 
 // fetch book info according to who the user is
-if (loggedInUserID() == 2679) {
+if (loggedInUserID() === "2679") {
   fetchAPI(`/admin/books/${bookId}`, "main", showBook);
 } else {
   fetchAPI(`/books/${bookId}`, "main", showBook);
@@ -17,8 +18,11 @@ if (loggedInUserID() == 2679) {
 function showBook(book) {
   document.title = `BOOKS4U | ${book.title}`;
 
-  if (loggedInUserID() && loggedInUserID() != 2679) {
+  if (loggedInUserID() && loggedInUserID() !== "2679") {
     loan_information = '<section id="loan_information"><button id="loan_btn">Loan the book</button></section>';
+  }
+  if (!loggedInUserID()) {
+    loan_instructions = '<p id="loan_instructions"><a href="login.html">Login</a> or <a href="signup.html">Sign up</a> to loan the book</p>';
   }
 
   // If admin is logged in and loans key is present
@@ -35,6 +39,7 @@ function showBook(book) {
   // create breadcrumbs depending on which page was the previous
   const bread_crumb = document.createElement("div");
   bread_crumb.id = "bread_crumbs";
+  const authorNameURL = book.author.replaceAll(" ", "-");
   if (urlParams.get("author")) {
     const authorId = urlParams.get("author");
     bread_crumb.innerHTML = `
@@ -43,7 +48,7 @@ function showBook(book) {
             <path d="M2 2L9 9" stroke-linecap="round" />
             <path d="M2 16L9 9" stroke-linecap="round" />
           </svg>
-          <a id="bread_current_author" href="author.html?id=${authorId}&author=${book.author}" >${book.author}</a>
+          <a id="bread_current_author" href="author.html?id=${authorId}&author=${authorNameURL}" >${book.author}</a>
           <svg id="bread_crumb_divider" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M2 2L9 9" stroke-linecap="round" />
             <path d="M2 16L9 9" stroke-linecap="round" />
@@ -69,6 +74,7 @@ function showBook(book) {
         <div>
           <h2>${book.title}</h2>
           <p id="author_name">${book.author}</p>
+          ${loan_instructions}
           ${loan_information}
           <section id="publisher_info" class="info_box">
             <div>
@@ -129,6 +135,7 @@ function checkUserLoan() {
       console.log("book loaned", response);
     })
     .catch((error) => {
+      console.log(error);
       // If user already have a loan
       if (error == "Error: This user has still this book on loan") {
         const loan_text = document.createElement("p");

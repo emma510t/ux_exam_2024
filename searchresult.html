@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/author.css" />
-    <script src="js/author.js" type="module"></script>
+    <link rel="stylesheet" href="css/searchresult.css" />
+    <script src="js/searchresult.js" type="module"></script>
     <script src="js/navigation.js" type="module"></script>
-    <title>BOOKS4U | Author</title>
+    <title>Books4U | Search</title>
   </head>
   <body>
     <header>
@@ -56,25 +56,17 @@
       </nav>
     </header>
     <main>
-      <section id="bread_crumbs">
-        <a href="authors.html">Authors</a>
-        <svg id="bread_crumb_divider" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 2L9 9" stroke-linecap="round" />
-          <path d="M2 16L9 9" stroke-linecap="round" />
-        </svg>
-        <p id="bread_current">Author</p>
-      </section>
-      <section>
-        <h2 id="author_title">Author</h2>
-        <section class="books_section">
-          <section class="loading_section">
-            <svg id="loader" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100">
-              <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
-            </svg>
-          </section>
-          <div class="book_selection hide"></div>
+      <div>
+        <h2>Search results for books</h2>
+        <h3>You searched for "<span id="search_result"></span>"</h3>
+        <section class="loading_section">
+          <svg id="loader" version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+            <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
+          </svg>
         </section>
-      </section>
+        <div class="book_selection hide"></div>
+        <p id="error_message" class="hide">No results found</p>
+      </div>
     </main>
     <footer><p>&copy; UX exam 2024</p></footer>
   </body>
