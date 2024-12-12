@@ -50,7 +50,7 @@ export const fetchAPI = (endpoint, errorDestination, func_name, parameters, opti
     .catch((error) => handleFetchCatchError(error, method, func_name, errorDestination));
 };
 
-// Creates and displays a book card and display it to a .popular_books section
+// Creates and displays a book card and display it to a .book_selection section
 export const handleBookCard = function (books, parameters) {
   // Creating a container for all the books
   const bookContainer = document.createElement("section");
@@ -105,19 +105,19 @@ export const handleBookCard = function (books, parameters) {
         // Appending the bookCard to the container
         bookContainer.append(bookCard);
       })
-      .catch((error) => handleFetchCatchError(error, "GET", "handleBookCard", ".popular_books"));
+      .catch((error) => handleFetchCatchError(error, "GET", "handleBookCard", ".book_selection"));
   });
 
   // Appending the container to the DOM and hiding the loader
-  const popular_books = document.querySelector(".popular_books");
-  popular_books.append(bookContainer);
+  const book_selection = document.querySelector(".book_selection");
+  book_selection.append(bookContainer);
 
   setTimeout(() => {
-    popular_books.classList.add("appear");
-    popular_books.classList.remove("hide");
+    book_selection.classList.add("appear");
+    book_selection.classList.remove("hide");
     document.querySelector(".discover_more") ? document.querySelector(".discover_more").classList.remove("hide") : "";
     document.querySelector(".loading_section").classList.add("hide");
-  }, 1000); // a timeout for hiding the loader and make the popular_books section appear
+  }, 1000); // a timeout for hiding the loader and make the book_selection section appear
 };
 
 // Creates and displays a author card and display it to a .authors_selection section
