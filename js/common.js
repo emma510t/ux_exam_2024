@@ -58,29 +58,34 @@ export const handleBookCard = function (books, parameters) {
   const bookContainer = document.createElement("section");
   bookContainer.className = "book_section";
 
-  // looping over all the books
-  books.forEach((book, index) => {
-    // Getting the book id
-    const bookId = book["book_id"];
+  if (books.length < 1) {
+    const no_books_message = document.createElement("p");
+    no_books_message.innerText = "Author has no books yet.";
+    document.querySelector(".book_selection").append(no_books_message);
+  } else {
+    // looping over all the books
+    books.forEach((book, index) => {
+      // Getting the book id
+      const bookId = book["book_id"];
 
-    // Fetching all the needed data for the book (also the cover)
-    fetch(`${baseUrl}/books/${bookId}`)
-      .then((response) => handleAPIError(response))
-      .then((bookData) => {
-        // Create an article for the book
-        const bookArticle = document.createElement("article");
-        bookArticle.className = "book_card";
+      // Fetching all the needed data for the book (also the cover)
+      fetch(`${baseUrl}/books/${bookId}`)
+        .then((response) => handleAPIError(response))
+        .then((bookData) => {
+          // Create an article for the book
+          const bookArticle = document.createElement("article");
+          bookArticle.className = "book_card";
 
-        // Handling image if extern API fails
-        const bookCover = bookData.cover !== "" ? bookData.cover : "/assets/images/book_placeholder.jpg";
+          // Handling image if extern API fails
+          const bookCover = bookData.cover !== "" ? bookData.cover : "/assets/images/book_placeholder.jpg";
 
-        const subtitle =
-          parameters.page === "index" || parameters.page === "discover" || parameters.page === "searchresults"
-            ? `<p>${bookData.author}</p>`
-            : '<p>About the book <span><svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg"> <path d="M2 2L9 9" stroke-width="4" stroke-linecap="round" /> <path d="M2 16L9 9" stroke-width="4" stroke-linecap="round" /></svg></span></p>';
+          const subtitle =
+            parameters.page === "index" || parameters.page === "discover" || parameters.page === "searchresults"
+              ? `<p>${bookData.author}</p>`
+              : '<p>About the book <span><svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg"> <path d="M2 2L9 9" stroke-width="4" stroke-linecap="round" /> <path d="M2 16L9 9" stroke-width="4" stroke-linecap="round" /></svg></span></p>';
 
-        // Building the bookArticle
-        bookArticle.innerHTML = `
+          // Building the bookArticle
+          bookArticle.innerHTML = `
               <div class="book_image_container">
                 <img src="${bookCover}" alt="" class="book_card_img">
               </div>
@@ -90,25 +95,26 @@ export const handleBookCard = function (books, parameters) {
               </div>
               `;
 
-        // Create an anchor element around the bookCard
-        const bookCard = document.createElement("a");
-        if (parameters.author_id !== undefined) {
-          bookCard.href = `book.html?id=${bookId}&author=${parameters.author_id}`;
-        } else {
-          bookCard.href = `book.html?id=${bookId}`;
-        }
+          // Create an anchor element around the bookCard
+          const bookCard = document.createElement("a");
+          if (parameters.author_id !== undefined) {
+            bookCard.href = `book.html?id=${bookId}&author=${parameters.author_id}`;
+          } else {
+            bookCard.href = `book.html?id=${bookId}`;
+          }
 
-        // If its the index page, then the fifth book will have special class
-        if (parameters.page === "index") {
-          index === 4 ? (bookCard.className = "fifth_book") : "";
-        }
-        bookCard.appendChild(bookArticle);
+          // If its the index page, then the fifth book will have special class
+          if (parameters.page === "index") {
+            index === 4 ? (bookCard.className = "fifth_book") : "";
+          }
+          bookCard.appendChild(bookArticle);
 
-        // Appending the bookCard to the container
-        bookContainer.append(bookCard);
-      })
-      .catch((error) => handleFetchCatchError(error, "GET", "handleBookCard", ".book_selection"));
-  });
+          // Appending the bookCard to the container
+          bookContainer.append(bookCard);
+        })
+        .catch((error) => handleFetchCatchError(error, "GET", "handleBookCard", ".book_selection"));
+    });
+  }
 
   // Appending the container to the DOM and hiding the loader
   const book_selection = document.querySelector(".book_selection");
